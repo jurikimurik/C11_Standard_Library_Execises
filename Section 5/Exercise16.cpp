@@ -1,0 +1,2 @@
+// Zadanie 16. Stworz vector z nieuporzadkowanymi i losowymi (przez program lub przez ciebie liczbami typu int). Nastepnie za pomoca
+// funkcji minmax() wypisz najwieksza i najmniejsza liczbe na ekranie
