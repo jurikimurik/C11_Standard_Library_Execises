@@ -1,0 +1,2 @@
+// Zadanie 18. Stworz klase LZ, w ktorej zdefinujesz operator porownywania == oraz operator <. Nastepnie w funkcji main
+// za pomoca przestrzeni nazwa std::rel_ops porownaj dwa obiekty LZ za pomoca operatorow =>, =<, >, !=. Kazde dzialanie przetestuj.
