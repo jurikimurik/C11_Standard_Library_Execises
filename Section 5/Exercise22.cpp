@@ -26,7 +26,7 @@ class Kalkulator_Dat{
         time_t t1 = system_clock::to_time_t(tp1);
         time_t t2 = system_clock::to_time_t(tp2);
 
-        string t1_str = ctime(&t1);
+        string t1_str = ctime(&t1); 
         t1_str.pop_back();
         string t2_str = ctime(&t2);
         t2_str.pop_back();
@@ -130,13 +130,13 @@ class Kalkulator_Dat{
         switch (znak)
         {
         case '+':
-            return false;
+            dodawanie();
             break;
         case '-':
-            return false;
+            odejmowanie();
             break;
         case 'R':
-            return false;
+            roznica();
             break;
         case 'q':
             return true;
@@ -147,13 +147,34 @@ class Kalkulator_Dat{
             return false;
             break;
         }
-
+        return false;
     }
 
     ////////////////////////////////////////////////////////////
 
     void dodawanie() {
+        time_t t1 = system_clock::to_time_t(tp1);
+        time_t t2 = system_clock::to_time_t(tp2);
 
+        tm *wsk_kal_t1 = gmtime(&t1);
+        tm *wsk_kal_t2 = gmtime(&t2);
+
+        struct tm t;
+        t.tm_sec = 0;
+        t.tm_min = 0;
+        t.tm_hour = 0;
+        t.tm_mday = wsk_kal_t1->tm_mday + wsk_kal_t2->tm_mday;
+        t.tm_mon = wsk_kal_t1->tm_mon + wsk_kal_t2->tm_mon;
+        t.tm_year = wsk_kal_t1->tm_year + 1900 + wsk_kal_t2->tm_year + 1900 - 1901;
+        t.tm_isdst = -1;
+        time_t tt = mktime(&t);
+        if (tt == -1)
+        {
+            cout << "Exception? Hmmm..." << endl;
+            throw exception();
+        }
+
+        cout << "Otrzymana data: " << ctime(&tt) << endl;
     }
 
     ////////////////////////////////////////////////////////////
@@ -165,7 +186,7 @@ class Kalkulator_Dat{
     ////////////////////////////////////////////////////////////
 
     void roznica() {
-        
+
     }
 
     ////////////////////////////////////////////////////////////
