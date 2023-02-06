@@ -1,0 +1,2 @@
+// Zadanie 14 - Wielkie Sprzatanie. Posiadasz koneter deque<string>, ktory miesci w sobie wiele mebli dostepnych w pokoju. Jednak dodaj w losowe miejsca tego pokoju "Karaluch". Wypisz powstaly kontener na
+// ekranie a nastepnie "zadzwon po inspektora" i usun wszystkich karaluchow. (Skorzystaj z algorytmow i lambdy do okreslenia czy podany obiekt jest karaluchiem).

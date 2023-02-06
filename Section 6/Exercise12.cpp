@@ -1,0 +1,1 @@
+// Zadanie 12 - Ubrania. Masz konetener osob typu deque<string>, gdzie kazdy z nich ma przydomek "Nagi". Za pomocą algorytmu i przekazanej funkcji, zmien ten przydomek u kazdej osoby na "Ubrany".

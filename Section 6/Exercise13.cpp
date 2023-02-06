@@ -1,0 +1,2 @@
+// Zadanie 13 - Przystepcy w pociagu. Masz vector z imonami i nazwiskami osob, ktorzy jada tym pociagiem. Rowniez posiadasz spis przestepcow. Przeszukaj caly pociag i wyrzuc kazdego przestepce z pociagu
+// oznajmniajac to wielkim komunikatem.

@@ -1,0 +1,1 @@
+// Zadanie 15 - Dwojki i jedynki. Korzystajac z lambdy w algorymie sortujacym, posortuj wszystko tak, by liczby podzielne przez 2 byly na samym poczatku, a inne - na samym koncu.
