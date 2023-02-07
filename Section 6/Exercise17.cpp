@@ -1,0 +1,2 @@
+// Zadanie 17 - Calkowita mieszanina. Masz do dyspozycji vector<int> z losowymi liczbami od o do 1000 o ilosci 500. Za pomoca obiektow funkcyjnych z biblioteki STL musisz najpierw posortowac te liczby od
+// najwiekszej do najmniejszej. Nastepnie usunac z niego krotnosci 2 kazda pozostala liczbe pomnozyc razy 22.

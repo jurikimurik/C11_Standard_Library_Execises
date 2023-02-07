@@ -1,0 +1,2 @@
+// Zadanie 16 - Magazyn. Posiadasz spis wszystkich rzeczy umeiszczonych na skladzie w postaci vector<string>. Musisz te wszystkie rzeczy zadeklarowac, a uszkodzone - wyrzucic. Za pomoca obiektow funkcyjnych
+// zadeklaruj (wpisz " - udokumentowane" po kazdej rzeczy) kazdy przedmiot. Ale przed tym rowniez za pomoca obiektu funkcyjnego usun z tego konteneru uszkodzone rzeczy (maja przydomek "uszkodzony").
