@@ -1,0 +1,2 @@
+// Zadanie 1 - Tablica zmian. Masz podany kontener array<int, 5> z wartosciami {1, 2, 3, 4, 5}. Spytaj sie uzytkownika, czy chce zmienic tam jakies elementy. Jezeli tak, to pozwol mu na to, lub zakoncz
+// wykonywanie programu. Przetestuj dzialanie programu jezeli wprowadzisz za duzo liczb rowniez.

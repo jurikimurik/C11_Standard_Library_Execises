@@ -1,0 +1,2 @@
+// Zadanie 6 - Sprawdzenie wydajnosci vector i deque. Stworz oba pojemniki o ilosci elementow 2000 (uzupelnione wartosciami). Nastepnie zmierz czas, kiedy trzeba wstawiac do samego srodka wartosci 
+// porownaj te wartosci w przypadku vector i deque.

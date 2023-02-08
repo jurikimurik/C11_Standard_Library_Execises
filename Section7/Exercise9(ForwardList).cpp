@@ -1,0 +1,1 @@
+// Zadanie 9 - Zabawa w poszukiwacza. Posiadasz forward_list o pojemnosci 100. Twoim zadaniem jest znalezc kazda liczbe podzielna przez 2 i przed nia wpisac liczbe 99.

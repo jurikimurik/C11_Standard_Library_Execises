@@ -1,0 +1,3 @@
+// Zadanie 3 - Sprawdzenie wydajnosci. Stworz vector<int> z losowymi liczbami o ilosci 1000. Nastepnie stworz kopię tego vectora. Od tego momentu zacznij zmierzac czas dla jednego przypadku: Wstaw
+// wszystkie elementy drugiego wektora do wektora pierwszego za pomoca push_back i wypisz czas. Nastepnie przywroc stary vector do poczatkowego rozmiaru i zacznij liczyc czas ponownie. Tym razem
+// jednak wstaw elementy z drugiego wektora do srodka vectoru pierwszego i wypisz czas.

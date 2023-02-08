@@ -1,0 +1,2 @@
+// Zadanie 4 - Sprawdzanie wydajnosci V.2. Masz dwa wektory typu int. Dla jednego z nich zarezerwuj obszar pamięci potrzebny na 2000 liczb. Nastepnie musisz do kazdego wektoru przypisac po kolei liczby od
+// 0 do 2000, przy czym sprawdzic czas, jaki potrzebny jest do przeprowadzenia tej operacji dla pierwszego vectoru oraz drugiego, a nastepnie te roznicy wypisac i pokazac uzytkownikowi.

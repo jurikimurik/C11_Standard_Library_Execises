@@ -1,0 +1,2 @@
+// Zadanie 8 - Symbioza. Posiadasz dwie listy z losowymi liczbami o ilosci 10. Zrob tak, zeby polowa pierwszej listy znalazla sie w drugiej i odwrotnie. Nastpenie posortuj kazda z tych list i zrob
+// unikatowa. Wynik wypisz na ekranie.

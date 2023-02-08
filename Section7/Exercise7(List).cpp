@@ -1,0 +1,2 @@
+// Zadanie 7 - Sprawdzenie wydajnosci. Stworz vector<int> i list z liczbami od 1 do 2000. Nastepnie do kazdej z tych list w srodek dodaj liczby od 2001 do 4000. Oblicz z jaka szybkoscia robi to vector i 
+// z jaka list. Prownaj te dwa wyniki

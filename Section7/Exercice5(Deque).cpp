@@ -1,0 +1,2 @@
+// Zadanie 5 - Vector vs. Deque. Operujac na stworzonym wcześniej wektorze z 2000 liczbami i takim samym deque, sprawdz i wypisz roznice czasowe przy ktorych na sam poczatek wpiszesz do kadzego z nich
+// liczby od 1 do 2000.
