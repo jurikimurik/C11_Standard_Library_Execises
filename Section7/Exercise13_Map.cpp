@@ -1,0 +1,2 @@
+// Zadanie 13 - Ksiazka telefoniczna. Posiadasz okreslony zbior danych map<string, int>, w ktorym string okresla imie przyjaciela(ki) a int - jego numer telefonu bez (+48). Niech uzytkownik wprowadza
+// imiona osob, ktorych numer telefonu potrzebuje, a zwrotnie dostaje informacje dotyczaca tego, jaki ten przyjaciel(ka) ma numer telefonu.

@@ -1,0 +1,2 @@
+// Zadanie 14 - Słownik. Stworz słownik, do ktorego uzytkonik bedzie mogl wprowadzac slowa a na koniec wypisze mu wszystkie wprowadzone przez niego słowa w postaci posortowanej od litery A do Z lub 
+// odwrotnie, jezeli bedzie tego chcial.

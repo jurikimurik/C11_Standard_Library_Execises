@@ -1,0 +1,1 @@
+// Zadanie 17 - Ultra-tablica. Korzystajac ze zwyklej tablicy, ktora miesci 1000 losowych liczb, posortuj ja a nastepnie wypisz wartosci na ekranie. (wykorzystaj algorytmy)

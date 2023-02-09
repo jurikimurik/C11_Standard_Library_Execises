@@ -1,0 +1,3 @@
+// Zadanie 12 - Modulo 2. Stworz szablon, ktory bedzie typem kryterium sortowania. Zdefinuj w nim takie zachowanie, zeby na poczatku mial liczby podzielne przez 2, a na koncu nie. Udostepnij tryb pracy
+// odwrotnej rowniez. Nastepnie stworz dwa kontenery set z roznymi ustawieniami trybu sortowania, ale wspolnym typem sortowania (stworzonym przez ciebie). Uzupelnij ich liczbami i sprawdz czy dobrze
+// sortuja. Nastepnie przypisz do pierwszego konteneru drugi i sprawdz, co się stało, wypisując na ekranie rezultat.

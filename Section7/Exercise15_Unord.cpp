@@ -1,0 +1,2 @@
+// Zadanie 15 - Worek v.2. Masz poczatkowy kontener unordered_set z losowymi 5-ma liczbami. W kolko pytaj sie uzytkownika czy chce dodac nowe elementy/sprawdzic czy jest tam okreslony/usunac jakis element.
+// Niech program sie skonczy wpisaniem litery 'q'.
