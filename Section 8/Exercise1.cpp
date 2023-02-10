@@ -49,7 +49,7 @@ kontener pobierz_liczby(string napis = "")
 //***************************************************************************************************************************************
 kontener::iterator przestaw_index(kontener& zbior, int gdzie = 0)
 {
-    auto pos = zbior.begin();
+    kontener::iterator pos = zbior.begin();
     for (int i = 0; i < gdzie; i++)
     {
         pos++;
@@ -97,6 +97,16 @@ kontener daj_kontener_liczb_losowych(int ilosc_liczb = 1000, int from = 0, int t
         *insert_pointer++ = rand() % to + from;
     }
     return liczby_losowe;
+}
+
+//***************************************************************************************************************************************
+kontener daj_kontener_liczb_losowych_od_uzytkownika()
+{
+    int ilosc_liczb = pobierz_liczbe("Podaj ilosc losowych liczb: ");
+
+    int zakres_dolny = pobierz_liczbe("Podaj zakres dolny losowosci: ");
+    int zakres_gorny = pobierz_liczbe("Podaj zakres gorny losowosci: ");
+    return daj_kontener_liczb_losowych(ilosc_liczb, zakres_dolny, zakres_gorny);
 }
 
 //***************************************************************************************************************************************
@@ -244,8 +254,7 @@ bool usuwanie(kontener& zbior)
 //***************************************************************************************************************************************
 bool wstawianie_liczby_losowe(kontener& zbior)
 {
-    int liczba = pobierz_liczbe("Wprowadz ilosc liczb: ");
-    kontener liczby = daj_kontener_liczb_losowych(liczba);
+    kontener liczby = daj_kontener_liczb_losowych_od_uzytkownika();
 
     int odpowiedz = pobierz_liczbe("Wprowadz gdzie chcesz wstawic liczby (1 - poczatek, 2 - srodek, 3 - koniec, 4 - wpisz index):");
     auto pos = zbior.begin();
@@ -327,18 +336,112 @@ bool wstawianie(kontener& zbior)
     }
     return true;
 }
+//***************************************************************************************************************************************
+bool znajdz_liczbe(kontener& zbior, bool zakres = false)
+{
+    if(zakres)
+    {
+        int dolna_liczba = pobierz_liczbe("Od (wlacznie):");
+
+        int gorna_liczba = pobierz_liczbe("Do (wlacznie):");
+
+        int ilosc_wystepowan = count_if(zbior.begin(), zbior.end(), [=](int liczba)
+                                        { if(liczba >= dolna_liczba && liczba <= gorna_liczba)
+                                        {
+                                            return true;
+                                        } else {
+                                            return false;
+                                        }});
+
+        cout << "Ilosc wystepowan podanej liczby(liczb): " << ilosc_wystepowan << endl;
+        return true;
+
+    } else {
+        int jaka_liczba = pobierz_liczbe("Wprowadz liczbe: ");
+        int ilosc_wystepowan = count_if(zbior.begin(), zbior.end(), [=](int liczba)
+                                        { return liczba == jaka_liczba ? true : false; });
+
+        cout << "Ilosc wystepowan podanej liczby(liczb): " << ilosc_wystepowan << endl;
+        return true;
+    }
+
+    
+}
 
 //***************************************************************************************************************************************
+bool znajdz(kontener &zbior)
+{
+    int odpowiedz = pobierz_liczbe("1 - Ilosc wystepowan pojedynczej liczby, 2 - Ilosc wystepowan liczb z zakresu: ");
+    switch (odpowiedz)
+    {
+    case 1:
+        znajdz_liczbe(zbior);
+        break;
+    case 2:
+        znajdz_liczbe(zbior, true);
+        break;
 
+    default:
+        return false;
+        break;
+    }
+    return true;
+}
+
+//***************************************************************************************************************************************
+bool zapisz(kontener& zbior)
+{
+    int odpowiedz = pobierz_liczbe("1 - Zapisz zbior, 2 - odczytaj: ");
+    switch (odpowiedz)
+    {
+    case 1:
+        praca_z_plikiem(zbior, tryb_pracy::zapis);
+        break;
+    
+    case 2:
+        praca_z_plikiem(zbior, tryb_pracy::odczyt);
+        break;
+
+    default:
+        return false;
+        break;
+    }
+    return true;
+}
 
 //***************************************************************************************************************************************
 int main()
 {
     srand(time(NULL));
-    kontener liczby = daj_kontener_liczb_losowych(9, 1, 5);
-    praca_z_plikiem(liczby, tryb_pracy::zapis);
-    wypisz(liczby);
-    wstawianie(liczby);
-    wypisz(liczby);
 
+    kontener liczby = daj_kontener_liczb_losowych_od_uzytkownika();
+    while (true)
+    {
+        wypisz(liczby);
+        int odpowiedz = pobierz_liczbe("\t1 - Sortowanie\n\t2 - Usuwanie\n\t3 - Wstawianie\n\t4 - Znajdywanie\n\t5 - Zapisywanie\n\t6 - Wyjscie:");
+        switch (odpowiedz)
+        {
+        case 1:
+            sortowanie(liczby);
+            break;
+        case 2:
+            usuwanie(liczby);
+            break;
+        case 3:
+            wstawianie(liczby);
+            break;
+        case 4:
+            znajdz(liczby);
+            break;
+        case 5:
+            zapisz(liczby);
+            break;
+        case 6:
+            exit(0);
+
+        default:
+            break;
+        }
+    }
+    
 }
