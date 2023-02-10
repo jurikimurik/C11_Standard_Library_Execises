@@ -89,11 +89,19 @@ void wypisz(const kontener &zbior, int liczba_kolumn = 25, int odstep_pomiedzy =
 
     int szerokosc_poj_liczby = to_string(maksymalna_l).size() + odstep_pomiedzy;
     int wysokosc = zbior.size() / liczba_kolumn;
+    int pozostalosc = zbior.size() % liczba_kolumn;
 
     auto pos = zbior.begin();
 
-    for (int y = 0; y < wysokosc; y++)
+    for (int y = 0; y <= wysokosc; y++)
     {
+        // pozostale liczby
+        if(y == wysokosc)
+        {
+            liczba_kolumn = pozostalosc;
+        }
+
+        // zwykle liczby
         for (int x = 0; x < liczba_kolumn; ++x)
         {
             cout << setw(szerokosc_poj_liczby) << *pos;
@@ -153,12 +161,12 @@ bool usuwanie_liczba(kontener& zbior)
 //***************************************************************************************************************************************
 bool usuwanie_przedzial(kontener& zbior)
 {
-    int poczatek_zakresu = pobierz_liczbe("Podaj poczatek zakresu: ");
-    int koniec_zakresu = pobierz_liczbe("Podaj gorny zakres: ");
+    int poczatek_zakresu = pobierz_liczbe("Podaj poczatek zakresu (wlacznie): ");
+    int koniec_zakresu = pobierz_liczbe("Podaj gorny zakres (wlacznie): ");
 
     zbior.erase(remove_if(zbior.begin(), zbior.end(), [=](int liczba)
                           {
-            if(liczba > poczatek_zakresu && liczba < koniec_zakresu) {
+            if(liczba >= poczatek_zakresu && liczba <= koniec_zakresu) {
                 return true;
             } else {
                 return false;
@@ -170,11 +178,13 @@ bool usuwanie_przedzial(kontener& zbior)
 //***************************************************************************************************************************************
 bool usuwanie_okresu(kontener& zbior)
 {
-    int poczatek_zakresu = pobierz_liczbe("Podaj poczatkowy index: ");
-    int koniec_zakresu = pobierz_liczbe("Podaj gorny index: ");
+    int poczatek_zakresu = pobierz_liczbe("Podaj poczatkowy index (wlacznie): ");
+    int koniec_zakresu = pobierz_liczbe("Podaj gorny index (wlacznie): ");
+
+    poczatek_zakresu--;
 
     auto pos_b = zbior.begin();
-    auto pos_e = zbior.end();
+    auto pos_e = zbior.begin();
     for (int i = 0; i < poczatek_zakresu; ++i)
     {
         pos_b++;
@@ -215,7 +225,7 @@ bool usuwanie(kontener& zbior)
 int main()
 {
     srand(time(NULL));
-    kontener liczby = daj_kontener_liczb_losowych(101, 1, 5);
+    kontener liczby = daj_kontener_liczb_losowych(9, 1, 5);
     praca_z_plikiem(liczby, tryb_pracy::zapis);
     wypisz(liczby);
     usuwanie(liczby);
