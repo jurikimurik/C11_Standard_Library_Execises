@@ -7,10 +7,6 @@
 
 #include <vector>
 #include <deque>
-#include <list>
-#include <forward_list>
-#include <set>
-#include <unordered_set>
 
 
 #include <algorithm>
@@ -39,7 +35,30 @@ int pobierz_liczbe(string napis = "")
 }
 
 //***************************************************************************************************************************************
-bool praca_z_plikiem(kontener& zbior, tryb_pracy tryb)
+kontener pobierz_liczby(string napis = "")
+{
+    cout << napis;
+
+    kontener liczby;
+    copy(istream_iterator<int>(cin), istream_iterator<int>(), inserter(liczby, liczby.begin()));
+    cin.clear();
+    cin.ignore();
+    return liczby;
+}
+
+//***************************************************************************************************************************************
+kontener::iterator przestaw_index(kontener& zbior, int gdzie = 0)
+{
+    auto pos = zbior.begin();
+    for (int i = 0; i < gdzie; i++)
+    {
+        pos++;
+    }
+    return pos;
+}
+
+//***************************************************************************************************************************************
+bool praca_z_plikiem(kontener &zbior, tryb_pracy tryb)
 {
     if(tryb == tryb_pracy::zapis) {
         ofstream strm("liczby.data");
@@ -65,8 +84,7 @@ bool praca_z_plikiem(kontener& zbior, tryb_pracy tryb)
             return false;
     }
 
-    
-    
+    return false;
 }
 
 //***************************************************************************************************************************************
@@ -217,9 +235,101 @@ bool usuwanie(kontener& zbior)
         break;
 
     default:
+        return false;
         break;
     }
+    return true;
 }
+
+//***************************************************************************************************************************************
+bool wstawianie_liczby_losowe(kontener& zbior)
+{
+    int liczba = pobierz_liczbe("Wprowadz ilosc liczb: ");
+    kontener liczby = daj_kontener_liczb_losowych(liczba);
+
+    int odpowiedz = pobierz_liczbe("Wprowadz gdzie chcesz wstawic liczby (1 - poczatek, 2 - srodek, 3 - koniec, 4 - wpisz index):");
+    auto pos = zbior.begin();
+    switch (odpowiedz)
+    {
+    case 1:
+        break;
+    case 2:
+        pos = przestaw_index(zbior, liczby.size() / 2);
+        break;
+    case 3:
+        pos = zbior.end();
+        break;
+
+    case 4:
+        odpowiedz = pobierz_liczbe("Wprowadz index: ");
+        pos = przestaw_index(zbior, odpowiedz-1);
+        break;
+
+    default:
+        return false;
+        break;
+    }
+
+    copy(liczby.begin(), liczby.end(), inserter(zbior, pos));
+    return true;
+
+    return true;
+}
+
+//***************************************************************************************************************************************
+bool wstawianie_liczby_okreslone(kontener &zbior)
+{
+    kontener liczby = pobierz_liczby("Wprowadz liczby a na koniec wprowadz symbol 'q': ");
+
+    int odpowiedz = pobierz_liczbe("Wprowadz gdzie chcesz wstawic liczby (1 - poczatek, 2 - srodek, 3 - koniec, 4 - wpisz index):");
+    auto pos = zbior.begin();
+    switch (odpowiedz)
+    {
+    case 1:
+        break;
+    case 2:
+        pos = przestaw_index(zbior, liczby.size() / 2);
+        break;
+    case 3:
+        pos = zbior.end();
+        break;
+
+    case 4:
+        odpowiedz = pobierz_liczbe("Wprowadz index: ");
+        pos = przestaw_index(zbior, odpowiedz);
+        break;
+
+    default:
+        return false;
+        break;
+    }
+
+    copy(liczby.begin(), liczby.end(), inserter(zbior, pos));
+    return true;
+}
+
+//***************************************************************************************************************************************
+bool wstawianie(kontener& zbior)
+{
+    int odpowiedz = pobierz_liczbe("1 - liczby losowe, 2 - wprowadzic liczby: ");
+    switch (odpowiedz)
+    {
+    case 1:
+        wstawianie_liczby_losowe(zbior);
+        break;
+    case 2:
+        wstawianie_liczby_okreslone(zbior);
+        break;
+
+    default:
+        return false;
+        break;
+    }
+    return true;
+}
+
+//***************************************************************************************************************************************
+
 
 //***************************************************************************************************************************************
 int main()
@@ -228,6 +338,7 @@ int main()
     kontener liczby = daj_kontener_liczb_losowych(9, 1, 5);
     praca_z_plikiem(liczby, tryb_pracy::zapis);
     wypisz(liczby);
-    usuwanie(liczby);
+    wstawianie(liczby);
     wypisz(liczby);
+
 }
