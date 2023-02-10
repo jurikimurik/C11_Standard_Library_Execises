@@ -128,39 +128,82 @@ bool sortowanie(kontener& zbior)
 }
 
 //***************************************************************************************************************************************
+bool usuwanie_liczba(kontener& zbior)
+{
+    int odpowiedz = pobierz_liczbe("1 - jedna liczbe, 2 - wiele takich samych liczb:");
+    int ktora_liczba = pobierz_liczbe("Wpisz liczbe: ");
+
+    if (odpowiedz == 1)
+    {
+        auto pos = find(zbior.begin(), zbior.end(), ktora_liczba);
+        zbior.erase(pos);
+    }
+    else if (odpowiedz == 2)
+    {
+        zbior.erase (remove_if(zbior.begin(), zbior.end(), [=](int liczba)
+                  { if(liczba == ktora_liczba)
+                {
+                    return true;
+                } else {
+                      return false;
+                } }), zbior.end());
+    }
+    return true;
+}
+//***************************************************************************************************************************************
+bool usuwanie_przedzial(kontener& zbior)
+{
+    int poczatek_zakresu = pobierz_liczbe("Podaj poczatek zakresu: ");
+    int koniec_zakresu = pobierz_liczbe("Podaj gorny zakres: ");
+
+    zbior.erase(remove_if(zbior.begin(), zbior.end(), [=](int liczba)
+                          {
+            if(liczba > poczatek_zakresu && liczba < koniec_zakresu) {
+                return true;
+            } else {
+                return false;
+            } }),
+                zbior.end());
+    return true;
+}
+
+//***************************************************************************************************************************************
+bool usuwanie_okresu(kontener& zbior)
+{
+    int poczatek_zakresu = pobierz_liczbe("Podaj poczatkowy index: ");
+    int koniec_zakresu = pobierz_liczbe("Podaj gorny index: ");
+
+    auto pos_b = zbior.begin();
+    auto pos_e = zbior.end();
+    for (int i = 0; i < poczatek_zakresu; ++i)
+    {
+        pos_b++;
+    }
+    for (int i = 0; i < koniec_zakresu; ++i)
+    {
+        pos_e++;
+    }
+
+    zbior.erase(pos_b, pos_e);
+    return true;
+}
+
+//***************************************************************************************************************************************
 bool usuwanie(kontener& zbior)
 {
     int odpowiedz = pobierz_liczbe("Wybierz typ usuwania (1 - okreslona liczby(a), 2 - przedzial liczbowy, 3 - okres ot i do): ");
     switch (odpowiedz)
     {
     case 1:
-        odpowiedz = pobierz_liczbe("1 - jedna liczbe, 2 - wiele takich samych liczb:");
-        int ktora_liczba = pobierz_liczbe("Wpisz liczbe: ");
-
-            
-        if(odpowiedz == 1) 
-        {
-        auto pos = find(zbior.begin(), zbior.end(), ktora_liczba);
-        zbior.erase(pos);
-        }
-        else if (odpowiedz == 2)
-        {
-        remove_if(zbior.begin(), zbior.end(), [=](int liczba)
-                { if(liczba == ktora_liczba)
-                {
-                    return true;
-                } else {
-                      return false;
-                } });
-            }
+        usuwanie_liczba(zbior);
         break;
-    
+
     case 2:
-        int poczatek_zakresu = pobierz_liczbe("Podaj poczatek zakresu: ");
-        int koniec_zakresu = pobierz_liczbe("Podaj gorny zakres: ");
+        usuwanie_przedzial(zbior);
         break;
 
     case 3:
+        usuwanie_okresu(zbior);
         break;
 
     default:
@@ -172,10 +215,9 @@ bool usuwanie(kontener& zbior)
 int main()
 {
     srand(time(NULL));
-    kontener liczby = daj_kontener_liczb_losowych();
+    kontener liczby = daj_kontener_liczb_losowych(101, 1, 5);
     praca_z_plikiem(liczby, tryb_pracy::zapis);
     wypisz(liczby);
-    sortowanie(liczby);
+    usuwanie(liczby);
     wypisz(liczby);
-    
 }
