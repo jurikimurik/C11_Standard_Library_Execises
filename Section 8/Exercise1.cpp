@@ -16,6 +16,7 @@
 #include <random>
 #include <iomanip>
 #include <type_traits>
+#include <functional>
 using namespace std;
 //***************************************************************************************************************************************
 using jednostka = int;
@@ -225,55 +226,89 @@ enum class tryb_usuwania
     przedzial,
     zakres
 };
-
+////////////////////////////////////////////////////////////////////////
+//Process dla wiekszosci
+template <class T>
+void usuwanie_proces(T& zbior, typename T::iterator pos_b, typename T::iterator pos_e, function<bool(int)> funkcja, tryb_usuwania jaki)
+{
+    if(jaki == tryb_usuwania::jedna_liczba || jaki == tryb_usuwania::przedzial)
+    {
+        zbior.erase(remove_if(pos_b, pos_e, funkcja), pos_e);
+    } else {
+        zbior.erase(pos_b, pos_e);
+    }
+}
+////////////////////////////////////////////////////////////////////////
+//Process dla wiekszosci
+template <>
+void usuwanie_proces(set<jednostka>& zbior, typename set<jednostka>::iterator pos_b, typename set<jednostka>::iterator pos_e, function<bool(int)> funkcja, tryb_usuwania jaki)
+{
+    if(jaki == tryb_usuwania::jedna_liczba || jaki == tryb_usuwania::przedzial)
+    {
+        for(const auto& elem : zbior)
+        {
+            if(funkcja(elem) == true)
+            {
+                zbior.erase(elem);
+            }
+        }
+    } else {
+        zbior.erase(pos_b, pos_e);
+    }
+}
+////////////////////////////////////////////////////////////////////////
 bool usuwanie_uniwersalne(kontener& zbior, tryb_usuwania jaki)
 {
+    int arg1 = 0;
+    int arg2 = 0;
+    kontener::iterator pos;
+
+    bool czy_duzo = true;
+
+    auto pos_b = zbior.begin();
+    auto pos_e = zbior.end();
+
+    function<bool(int)> funkcja;
+
     if(jaki == tryb_usuwania::jedna_liczba)
     {
-        int odpowiedz = pobierz_liczbe("1 - jedna liczbe, 0 - wiele takich samych liczb:");
-        int ktora_liczba = pobierz_liczbe("Wpisz liczbe: ");
-        
-        bool czy_duzo = true;
+        arg1 = pobierz_liczbe("1 - jedna liczbe, 0 - wiele takich samych liczb:");
+        arg2 = pobierz_liczbe("Wpisz liczbe: ");
 
-        zbior.erase (remove_if(zbior.begin(), zbior.end(), [&](int liczba)
-                  { if(liczba == ktora_liczba && czy_duzo)
+        funkcja = [&](int liczba)
+                  { if(liczba == arg2 && czy_duzo)
                 {
-                    if(odpowiedz == 1)
+                    if(arg1 == 1)
                         czy_duzo = false;
                     return true;
                 } else {
                     return false;
-                } }), zbior.end());
+                } };
 
     } else if (jaki == tryb_usuwania::przedzial)
     {
-        int poczatek_zakresu = pobierz_liczbe("Podaj poczatek zakresu (wlacznie): ");
-        int koniec_zakresu = pobierz_liczbe("Podaj gorny zakres (wlacznie): ");
+        arg1 = pobierz_liczbe("Podaj poczatek zakresu (wlacznie): ");
+        arg2 = pobierz_liczbe("Podaj gorny zakres (wlacznie): ");
 
-        zbior.erase(remove_if(zbior.begin(), zbior.end(), [=](int liczba)
+        funkcja = [=](int liczba)
                           {
-            if(liczba >= poczatek_zakresu && liczba <= koniec_zakresu) {
+            if(liczba >= arg1 && liczba <= arg2) {
                 return true;
             } else {
                 return false;
-            } }),
-                zbior.end());
+            } };
 
     } else if (jaki == tryb_usuwania::zakres)
     {
-        int poczatek_zakresu = pobierz_liczbe("Podaj poczatkowy index (wlacznie): ");
-        int koniec_zakresu = pobierz_liczbe("Podaj gorny index (wlacznie): ");
+        arg1 = pobierz_liczbe("Podaj poczatkowy index (wlacznie): ");
+        arg2 = pobierz_liczbe("Podaj gorny index (wlacznie): ");
 
-        poczatek_zakresu--;
-
-        auto pos_b = zbior.begin();
-        auto pos_e = zbior.begin();
-
-        pos_b = przestaw_index(zbior, poczatek_zakresu);
-        pos_e = przestaw_index(zbior, koniec_zakresu);
-
-        zbior.erase(pos_b, pos_e);
+        pos_b = przestaw_index(zbior, --arg1);
+        pos_e = przestaw_index(zbior, arg2);
     }
+
+    usuwanie_proces(zbior, pos_b, pos_e, funkcja, jaki);
+
     return true;
 }
 
