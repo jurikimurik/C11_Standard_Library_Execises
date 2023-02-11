@@ -7,7 +7,9 @@
 
 #include <vector>
 #include <deque>
-
+#include <list>
+#include <forward_list>
+#include <set>
 
 #include <algorithm>
 #include <iterator>
@@ -16,7 +18,8 @@
 #include <type_traits>
 using namespace std;
 //***************************************************************************************************************************************
-using kontener = vector<int>;
+using jednostka = int;
+using kontener = vector<jednostka>;
 
 //***************************************************************************************************************************************
 enum class tryb_pracy
@@ -140,7 +143,9 @@ void wypisz(const kontener &zbior, int liczba_kolumn = 25, int odstep_pomiedzy =
 }
 
 //***************************************************************************************************************************************
-bool sortowanie(kontener& zbior)
+// Dla wyszystkich pozostalych
+template <class T>
+bool sortowanie(T& zbior)
 {
     int odpowiedz = pobierz_liczbe("Wybierz typ sortowania (1 - <, 2 - >, 3 - losowo): ");
     switch (odpowiedz)
@@ -162,37 +167,90 @@ bool sortowanie(kontener& zbior)
     }
     return true;
 }
-
-//***************************************************************************************************************************************
-bool usuwanie_liczba(kontener& zbior)
+///////////////////////////////////////////////////////////////////////////////////////
+//Specjalizajca - list
+template <>
+bool sortowanie(list<jednostka>& zbior)
 {
-    int odpowiedz = pobierz_liczbe("1 - jedna liczbe, 2 - wiele takich samych liczb:");
-    int ktora_liczba = pobierz_liczbe("Wpisz liczbe: ");
-
-    if (odpowiedz == 1)
+    int odpowiedz = pobierz_liczbe("Wybierz typ sortowania (1 - <, 2 - >): ");
+    switch (odpowiedz)
     {
-        auto pos = find(zbior.begin(), zbior.end(), ktora_liczba);
-        zbior.erase(pos);
-    }
-    else if (odpowiedz == 2)
-    {
-        zbior.erase (remove_if(zbior.begin(), zbior.end(), [=](int liczba)
-                  { if(liczba == ktora_liczba)
-                {
-                    return true;
-                } else {
-                      return false;
-                } }), zbior.end());
+    case 1:
+        zbior.sort();
+        break;
+    case 2:
+        zbior.sort(greater<int>());
+        break;
+    default:
+        cout << "Odpowiedz niezrozumiala. " << endl;
+        return false;
+        break;
     }
     return true;
 }
-//***************************************************************************************************************************************
-bool usuwanie_przedzial(kontener& zbior)
+///////////////////////////////////////////////////////////////////////////////////////
+//Specjalizajca - forward list
+template <>
+bool sortowanie(forward_list<jednostka>& zbior)
 {
-    int poczatek_zakresu = pobierz_liczbe("Podaj poczatek zakresu (wlacznie): ");
-    int koniec_zakresu = pobierz_liczbe("Podaj gorny zakres (wlacznie): ");
+    int odpowiedz = pobierz_liczbe("Wybierz typ sortowania (1 - <, 2 - >): ");
+    switch (odpowiedz)
+    {
+    case 1:
+        zbior.sort();
+        break;
+    case 2:
+        zbior.sort(greater<int>());
+        break;
+    default:
+        cout << "Odpowiedz niezrozumiala. " << endl;
+        return false;
+        break;
+    }
+    return true;
+}
+///////////////////////////////////////////////////////////////////////////////////////
+//Specjalizajca - set
+template <>
+bool sortowanie(set<jednostka>& zbior)
+{
+    cout << "Nie wolno sortowac set!" << endl;
+    return true;
+}
 
-    zbior.erase(remove_if(zbior.begin(), zbior.end(), [=](int liczba)
+//***************************************************************************************************************************************
+enum class tryb_usuwania
+{
+    jedna_liczba,
+    przedzial,
+    zakres
+};
+
+bool usuwanie_uniwersalne(kontener& zbior, tryb_usuwania jaki)
+{
+    if(jaki == tryb_usuwania::jedna_liczba)
+    {
+        int odpowiedz = pobierz_liczbe("1 - jedna liczbe, 0 - wiele takich samych liczb:");
+        int ktora_liczba = pobierz_liczbe("Wpisz liczbe: ");
+        
+        bool czy_duzo = true;
+
+        zbior.erase (remove_if(zbior.begin(), zbior.end(), [&](int liczba)
+                  { if(liczba == ktora_liczba && czy_duzo)
+                {
+                    if(odpowiedz == 1)
+                        czy_duzo = false;
+                    return true;
+                } else {
+                    return false;
+                } }), zbior.end());
+
+    } else if (jaki == tryb_usuwania::przedzial)
+    {
+        int poczatek_zakresu = pobierz_liczbe("Podaj poczatek zakresu (wlacznie): ");
+        int koniec_zakresu = pobierz_liczbe("Podaj gorny zakres (wlacznie): ");
+
+        zbior.erase(remove_if(zbior.begin(), zbior.end(), [=](int liczba)
                           {
             if(liczba >= poczatek_zakresu && liczba <= koniec_zakresu) {
                 return true;
@@ -200,31 +258,25 @@ bool usuwanie_przedzial(kontener& zbior)
                 return false;
             } }),
                 zbior.end());
+
+    } else if (jaki == tryb_usuwania::zakres)
+    {
+        int poczatek_zakresu = pobierz_liczbe("Podaj poczatkowy index (wlacznie): ");
+        int koniec_zakresu = pobierz_liczbe("Podaj gorny index (wlacznie): ");
+
+        poczatek_zakresu--;
+
+        auto pos_b = zbior.begin();
+        auto pos_e = zbior.begin();
+
+        pos_b = przestaw_index(zbior, poczatek_zakresu);
+        pos_e = przestaw_index(zbior, koniec_zakresu);
+
+        zbior.erase(pos_b, pos_e);
+    }
     return true;
 }
 
-//***************************************************************************************************************************************
-bool usuwanie_okresu(kontener& zbior)
-{
-    int poczatek_zakresu = pobierz_liczbe("Podaj poczatkowy index (wlacznie): ");
-    int koniec_zakresu = pobierz_liczbe("Podaj gorny index (wlacznie): ");
-
-    poczatek_zakresu--;
-
-    auto pos_b = zbior.begin();
-    auto pos_e = zbior.begin();
-    for (int i = 0; i < poczatek_zakresu; ++i)
-    {
-        pos_b++;
-    }
-    for (int i = 0; i < koniec_zakresu; ++i)
-    {
-        pos_e++;
-    }
-
-    zbior.erase(pos_b, pos_e);
-    return true;
-}
 
 //***************************************************************************************************************************************
 bool usuwanie(kontener& zbior)
@@ -233,15 +285,15 @@ bool usuwanie(kontener& zbior)
     switch (odpowiedz)
     {
     case 1:
-        usuwanie_liczba(zbior);
+        usuwanie_uniwersalne(zbior, tryb_usuwania::jedna_liczba);
         break;
 
     case 2:
-        usuwanie_przedzial(zbior);
+        usuwanie_uniwersalne(zbior, tryb_usuwania::przedzial);
         break;
 
     case 3:
-        usuwanie_okresu(zbior);
+        usuwanie_uniwersalne(zbior, tryb_usuwania::zakres);
         break;
 
     default:
@@ -251,44 +303,15 @@ bool usuwanie(kontener& zbior)
     return true;
 }
 
-//***************************************************************************************************************************************
-bool wstawianie_liczby_losowe(kontener& zbior)
-{
-    kontener liczby = daj_kontener_liczb_losowych_od_uzytkownika();
-
-    int odpowiedz = pobierz_liczbe("Wprowadz gdzie chcesz wstawic liczby (1 - poczatek, 2 - srodek, 3 - koniec, 4 - wpisz index):");
-    auto pos = zbior.begin();
-    switch (odpowiedz)
-    {
-    case 1:
-        break;
-    case 2:
-        pos = przestaw_index(zbior, liczby.size() / 2);
-        break;
-    case 3:
-        pos = zbior.end();
-        break;
-
-    case 4:
-        odpowiedz = pobierz_liczbe("Wprowadz index: ");
-        pos = przestaw_index(zbior, odpowiedz-1);
-        break;
-
-    default:
-        return false;
-        break;
-    }
-
-    copy(liczby.begin(), liczby.end(), inserter(zbior, pos));
-    return true;
-
-    return true;
-}
 
 //***************************************************************************************************************************************
-bool wstawianie_liczby_okreslone(kontener &zbior)
+bool wstawianie_liczb(kontener &zbior, bool czy_losowe = true)
 {
-    kontener liczby = pobierz_liczby("Wprowadz liczby a na koniec wprowadz symbol 'q': ");
+    kontener liczby;
+    if(czy_losowe)
+        liczby = daj_kontener_liczb_losowych_od_uzytkownika();
+    else
+        liczby = pobierz_liczby("Wprowadz liczby a na koniec wprowadz symbol 'q': ");
 
     int odpowiedz = pobierz_liczbe("Wprowadz gdzie chcesz wstawic liczby (1 - poczatek, 2 - srodek, 3 - koniec, 4 - wpisz index):");
     auto pos = zbior.begin();
@@ -324,10 +347,10 @@ bool wstawianie(kontener& zbior)
     switch (odpowiedz)
     {
     case 1:
-        wstawianie_liczby_losowe(zbior);
+        wstawianie_liczb(zbior);
         break;
     case 2:
-        wstawianie_liczby_okreslone(zbior);
+        wstawianie_liczb(zbior, false);
         break;
 
     default:
@@ -364,8 +387,6 @@ bool znajdz_liczbe(kontener& zbior, bool zakres = false)
         cout << "Ilosc wystepowan podanej liczby(liczb): " << ilosc_wystepowan << endl;
         return true;
     }
-
-    
 }
 
 //***************************************************************************************************************************************
@@ -418,7 +439,7 @@ int main()
     while (true)
     {
         wypisz(liczby);
-        int odpowiedz = pobierz_liczbe("\t1 - Sortowanie\n\t2 - Usuwanie\n\t3 - Wstawianie\n\t4 - Znajdywanie\n\t5 - Zapisywanie\n\t6 - Wyjscie:");
+        int odpowiedz = pobierz_liczbe("\t1 - Sortowanie\n\t2 - Usuwanie\n\t3 - Wstawianie\n\t4 - Znajdywanie\n\t5 - Zapisywanie/Odczyt\n\t6 - Wyjscie:");
         switch (odpowiedz)
         {
         case 1:
