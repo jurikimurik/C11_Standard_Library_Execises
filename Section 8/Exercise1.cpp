@@ -20,7 +20,7 @@
 using namespace std;
 //***************************************************************************************************************************************
 using jednostka = int;
-using kontener = vector<jednostka>;
+using kontener = multiset<jednostka>;
 
 //***************************************************************************************************************************************
 enum class tryb_pracy
@@ -218,6 +218,14 @@ bool sortowanie(set<jednostka>& zbior)
     cout << "Nie wolno sortowac set!" << endl;
     return true;
 }
+///////////////////////////////////////////////////////////////////////////////////////
+//Specjalizajca - set
+template <>
+bool sortowanie(multiset<jednostka>& zbior)
+{
+    cout << "Nie wolno sortowac multiset!" << endl;
+    return true;
+}
 
 //***************************************************************************************************************************************
 enum class tryb_usuwania
@@ -239,23 +247,46 @@ void usuwanie_proces(T& zbior, typename T::iterator pos_b, typename T::iterator 
     }
 }
 ////////////////////////////////////////////////////////////////////////
-//Process dla wiekszosci
+//Process dla set
 template <>
 void usuwanie_proces(set<jednostka>& zbior, typename set<jednostka>::iterator pos_b, typename set<jednostka>::iterator pos_e, function<bool(int)> funkcja, tryb_usuwania jaki)
 {
     if(jaki == tryb_usuwania::jedna_liczba || jaki == tryb_usuwania::przedzial)
     {
-        for(const auto& elem : zbior)
+        for(auto pos = zbior.begin(); pos != zbior.end();)
         {
-            if(funkcja(elem) == true)
+            if(funkcja(*pos) == true)
             {
-                zbior.erase(elem);
+                pos = zbior.erase(pos);
+            } else {
+                pos++;
             }
         }
     } else {
         zbior.erase(pos_b, pos_e);
     }
 }
+////////////////////////////////////////////////////////////////////////
+//Process dla multiset
+template <>
+void usuwanie_proces(multiset<jednostka>& zbior, typename set<jednostka>::iterator pos_b, typename set<jednostka>::iterator pos_e, function<bool(int)> funkcja, tryb_usuwania jaki)
+{
+    if(jaki == tryb_usuwania::jedna_liczba || jaki == tryb_usuwania::przedzial)
+    {
+        for(auto pos = zbior.begin(); pos != zbior.end();)
+        {
+            if(funkcja(*pos) == true)
+            {
+                pos = zbior.erase(pos);
+            } else {
+                pos++;
+            }
+        }
+    } else {
+        zbior.erase(pos_b, pos_e);
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////
 bool usuwanie_uniwersalne(kontener& zbior, tryb_usuwania jaki)
 {
