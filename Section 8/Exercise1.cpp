@@ -94,7 +94,7 @@ kontener daj_kontener_liczb_losowych(int ilosc_liczb = 1000, int from = 0, int t
     auto insert_pointer = inserter(liczby_losowe, liczby_losowe.begin());
     for (int i = 0; i < ilosc_liczb; i++)
     {
-        *insert_pointer++ = rand() % to + from;
+        *insert_pointer++ = rand() % (to-from) + from;
     }
     return liczby_losowe;
 }
