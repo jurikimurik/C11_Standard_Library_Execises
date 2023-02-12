@@ -35,7 +35,7 @@ class skrzynia
     string nazwa;
     klucz najlepszy_klucz;
 
-    bool operator<(const skrzynia& another)
+    bool operator<(const skrzynia &another) const
     {
         return nazwa < another.nazwa;
     }
@@ -88,16 +88,14 @@ void wskazowka_od_diabla(skrzynia co_za_skrzynia, int trudnosc)
     cout << zag.first << endl;
     int odpowiedz = pobierz_odpowiedz("Podaj odpowiedz: ");
 
-    cout << "Najlepiej by pasowal: ";
+    cout << "Dla skrzyni " << co_za_skrzynia.nazwa << " najlepiej by pasowal: ";
     if (odpowiedz == zag.second)
     {
         cout << najlepsze_dopasowania.at(co_za_skrzynia) << endl;
-        cout << "DOBRZE";
     }
     else
     {
         cout << rodzaje.at(rand() % rodzaje.size()) << endl;
-        cout << "ZLE";
     }
 }
 //***********************************************************************************************************************************************
