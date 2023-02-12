@@ -6,6 +6,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <random>
 #include <iterator>
 #include <iostream>
 using namespace std;
@@ -41,24 +42,16 @@ class skrzynia
     }
 };
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-vector<skrzynia> wszystkie_skrzynie;
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-skrzynia skrzynia_Jednookiego_Jeffry("Jednookiego Jeffry");
-skrzynia skrzynia_Belzebuba("Belzebuba");
-skrzynia skrzynia_Losu("Losu");
-skrzynia skrzynia_Boga("Boga");
-skrzynia skrzynia_Morza("Morza");
+vector<skrzynia> wszystkie_skrzynie = {skrzynia("Jednookiego Jeffry"), skrzynia("Belzebuba"), skrzynia("Losu"), skrzynia("Boga"), skrzynia("Morza")};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 map<skrzynia, rodzaj_klucza> najlepsze_dopasowania;
 //***********************************************************************************************************************************************
 void inicjalizacja()
 {
     srand(time(NULL));
-    wszystkie_skrzynie.push_back(skrzynia_Jednookiego_Jeffry);
-    wszystkie_skrzynie.push_back(skrzynia_Belzebuba);
-    wszystkie_skrzynie.push_back(skrzynia_Losu);
-    wszystkie_skrzynie.push_back(skrzynia_Boga);
-    wszystkie_skrzynie.push_back(skrzynia_Morza);
+
+    shuffle(rodzaje.begin(), rodzaje.end(), mt19937());
+    shuffle(dopasowania.begin(), dopasowania.end(), mt19937());
 
     for(const auto& elem : wszystkie_skrzynie)
     {
@@ -102,8 +95,7 @@ void wskazowka_od_diabla(skrzynia co_za_skrzynia, int trudnosc)
 int main()
 {
     inicjalizacja();
-    wskazowka_od_diabla(skrzynia_Jednookiego_Jeffry, 0);
-    for(const auto& elem : najlepsze_dopasowania)
+    for (const auto &elem : najlepsze_dopasowania)
     {
         cout << elem.first.nazwa << ", " << elem.second << endl;
     }
