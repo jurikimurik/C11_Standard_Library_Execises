@@ -13,54 +13,100 @@ using namespace std;
 vector<string> rodzaje = {"Klucz Piracki", "Klucz Smokow", "Klucz Losu", "Klucz Diabelski", "Klucz Wikingow"};
 vector<string> dopasowania = {"Skrzynia Jednookiego Jeffry", "Skrzynia Belzebuba", "Skrzynia Losu", "Skrzynia Boga", "Skrzynia Morza"};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class klucz
-{
-    public:
-        klucz(string i = rodzaje.at(rand() % rodzaje.size())) : id(i){}
-
-        string id;
-        string dopasowanie;
-};
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using rodzaj_klucza = string;
 using nagroda = int;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-map<rodzaj_klucza, nagroda> skrzynia_Jednookiego_Jeffry;
-map<rodzaj_klucza, nagroda> skrzynia_Belzebuba;
-map<rodzaj_klucza, nagroda> skrzynia_Losu;
-map<rodzaj_klucza, nagroda> skrzynia_Boga;
-map<rodzaj_klucza, nagroda> skrzynia_Morza;
-//***********************************************************************************************************************************************
-void wypelnienie_mapy(map<rodzaj_klucza, nagroda>& mapa, rodzaj_klucza ktory_najbardziej_wynagradzany)
+class klucz
 {
-    mapa.insert(make_pair(ktory_najbardziej_wynagradzany, 80 * (rand() % 10)));
+    public:
+    klucz(string i = rodzaje.at(rand() % rodzaje.size())) : id(i) {}
+    string id;
+};
 
-    for (int i = 0; i < rodzaje.size(); ++i)
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class skrzynia
+{
+    public:
+    skrzynia(string str) : nazwa("Skrzynia " + str)
     {
-        if(rodzaje.at(i) != ktory_najbardziej_wynagradzany)
-        {
-            mapa.insert(make_pair(rodzaje.at(i), rand() % 100));
-        }
+        najlepszy_klucz = klucz();
     }
-       
-}
+
+    string nazwa;
+    klucz najlepszy_klucz;
+
+    bool operator<(const skrzynia& another)
+    {
+        return nazwa < another.nazwa;
+    }
+};
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+vector<skrzynia> wszystkie_skrzynie;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+skrzynia skrzynia_Jednookiego_Jeffry("Jednookiego Jeffry");
+skrzynia skrzynia_Belzebuba("Belzebuba");
+skrzynia skrzynia_Losu("Losu");
+skrzynia skrzynia_Boga("Boga");
+skrzynia skrzynia_Morza("Morza");
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+map<skrzynia, rodzaj_klucza> najlepsze_dopasowania;
 //***********************************************************************************************************************************************
 void inicjalizacja()
 {
     srand(time(NULL));
-    wypelnienie_mapy(skrzynia_Jednookiego_Jeffry, rodzaje.at(0));
-    wypelnienie_mapy(skrzynia_Belzebuba, rodzaje.at(1));
-    wypelnienie_mapy(skrzynia_Losu, rodzaje.at(2));
-    wypelnienie_mapy(skrzynia_Boga, rodzaje.at(3));
-    wypelnienie_mapy(skrzynia_Morza, rodzaje.at(4));
+    wszystkie_skrzynie.push_back(skrzynia_Jednookiego_Jeffry);
+    wszystkie_skrzynie.push_back(skrzynia_Belzebuba);
+    wszystkie_skrzynie.push_back(skrzynia_Losu);
+    wszystkie_skrzynie.push_back(skrzynia_Boga);
+    wszystkie_skrzynie.push_back(skrzynia_Morza);
+
+    for(const auto& elem : wszystkie_skrzynie)
+    {
+        najlepsze_dopasowania.insert(make_pair(elem, elem.najlepszy_klucz.id));
+    }
+}
+//***********************************************************************************************************************************************
+int pobierz_odpowiedz(string napis = "")
+{
+    cout << napis;
+    int liczba;
+    cin >> liczba;
+    return liczba;
+}
+//***********************************************************************************************************************************************
+pair<string, int> zagadka(int trudnosc = 1)
+{
+    return make_pair("Ile bedzie 2+2?", 4);
+}
+//***********************************************************************************************************************************************
+void wskazowka_od_diabla(skrzynia co_za_skrzynia, int trudnosc)
+{
+    cout << "Chcesz wskazowki?! Ale najpierw podaj odpowiedz: ";
+
+    pair<string, int> zag = zagadka(trudnosc);
+
+    cout << zag.first << endl;
+    int odpowiedz = pobierz_odpowiedz("Podaj odpowiedz: ");
+
+    cout << "Najlepiej by pasowal: ";
+    if (odpowiedz == zag.second)
+    {
+        cout << najlepsze_dopasowania.at(co_za_skrzynia) << endl;
+        cout << "DOBRZE";
+    }
+    else
+    {
+        cout << rodzaje.at(rand() % rodzaje.size()) << endl;
+        cout << "ZLE";
+    }
 }
 //***********************************************************************************************************************************************
 int main()
 {
-        inicjalizacja();
-
-        for(const auto& elem : skrzynia_Jednookiego_Jeffry)
-        {
-            cout << elem.first << " - " << elem.second << endl;
-        }
+    inicjalizacja();
+    wskazowka_od_diabla(skrzynia_Jednookiego_Jeffry, 0);
+    for(const auto& elem : najlepsze_dopasowania)
+    {
+        cout << elem.first.nazwa << ", " << elem.second << endl;
+    }
 }
