@@ -12,7 +12,6 @@
 using namespace std;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 vector<string> rodzaje = {"Klucz Piracki", "Klucz Smokow", "Klucz Losu", "Klucz Diabelski", "Klucz Wikingow"};
-vector<string> dopasowania = {"Skrzynia Jednookiego Jeffry", "Skrzynia Belzebuba", "Skrzynia Losu", "Skrzynia Boga", "Skrzynia Morza"};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using rodzaj_klucza = string;
 using nagroda = int;
@@ -51,7 +50,6 @@ void inicjalizacja()
     srand(time(NULL));
 
     shuffle(rodzaje.begin(), rodzaje.end(), mt19937());
-    shuffle(dopasowania.begin(), dopasowania.end(), mt19937());
 
     for(const auto& elem : wszystkie_skrzynie)
     {
@@ -69,7 +67,42 @@ int pobierz_odpowiedz(string napis = "")
 //***********************************************************************************************************************************************
 pair<string, int> zagadka(int trudnosc = 1)
 {
-    return make_pair("Ile bedzie 2+2?", 4);
+    int odpowiedz = rand() % 20;
+    string pytanie = to_string(odpowiedz);
+
+    for (int i = 0; i < trudnosc; ++i)
+    {
+        int liczba = rand() % 20;
+        char operacja;
+        switch (rand() % 4)
+        {
+        case 0:
+            operacja = '+';
+            odpowiedz += liczba;
+            break;
+        case 1:
+            operacja = '-';
+            odpowiedz -= liczba;
+            break;
+        case 2:
+            operacja = '*';
+            pytanie = "(" + pytanie + ")";
+            odpowiedz *= liczba;
+            break;
+        case 3:
+            operacja = '/';
+            pytanie = "(" + pytanie + ")";
+            odpowiedz /= liczba;
+            break;
+        default:
+            break;
+        }
+
+        pytanie += operacja + to_string(liczba);
+    }
+
+    pytanie = "Ile bedzie " + pytanie + "?";
+    return make_pair(pytanie, odpowiedz);
 }
 //***********************************************************************************************************************************************
 void wskazowka_od_diabla(skrzynia co_za_skrzynia, int trudnosc)
@@ -85,6 +118,7 @@ void wskazowka_od_diabla(skrzynia co_za_skrzynia, int trudnosc)
     if (odpowiedz == zag.second)
     {
         cout << najlepsze_dopasowania.at(co_za_skrzynia) << endl;
+        cout << "Dobrze" << endl;
     }
     else
     {
@@ -95,8 +129,10 @@ void wskazowka_od_diabla(skrzynia co_za_skrzynia, int trudnosc)
 int main()
 {
     inicjalizacja();
-    for (const auto &elem : najlepsze_dopasowania)
+
+    while(true)
     {
-        cout << elem.first.nazwa << ", " << elem.second << endl;
+        wskazowka_od_diabla(wszystkie_skrzynie.at(0), 2);
     }
+    
 }
