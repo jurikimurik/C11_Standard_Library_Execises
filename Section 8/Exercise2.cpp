@@ -92,74 +92,110 @@ void wypisz(vector<char> zbior)
     cout << endl;
 }
 //****************************************************************************************************************
+void usun_podzespol(vector<char>& smietnik, vector<char>& kopia)
+{
+    if(smietnik.empty() || kopia.empty())
+        return;
+
+    int pozycja1 = 0;
+    int pozycja2 = 0;
+    bool jest_takie_same = false;
+
+    for (auto pos1 = kopia.begin(), pos2 = smietnik.begin(); pos1 != kopia.end(); ++pos1)
+    {
+        if(*pos1 == *pos2)
+        {
+            auto pos1_1 = pos1;
+            auto pos2_1 = pos2;
+
+            bool takie_same = true;
+            while(pos2_1 != smietnik.end())
+            {
+                if(*pos1_1 != *pos2_1)
+                {
+                    takie_same = false;
+                    break;
+                } else {
+                    pos1_1++;
+                    pos2_1++;
+                }
+            }
+
+            if(takie_same) {
+
+                pozycja1 = distance(pos1, kopia.begin());
+                pozycja2 = distance(pos1, pos1_1);
+                jest_takie_same = true;
+                break;
+            }
+        }
+    }
+
+    if(jest_takie_same)
+    {
+        cout << pozycja1 << ", " << pozycja2 << endl;
+        kopia.erase(kopia.begin() + pozycja1, kopia.begin() + (pozycja2));
+    }
+}
+
+//****************************************************************************************************************
 vector<char> analizuj(vector<char> dane)
 {
     vector<char> kopia(dane);
 
-    vector<char> wek1;
-    vector<char> wek2;
-    vector<char> wek3;
-    vector<char> wek4;
+    vector<char> wyjscie;
 
-    int poziom = 0;
+    vector<char> smietnik;
 
     auto pos = kopia.begin();
-    if(czyOperacja(*pos))
-        poziom++; // 1
-    wek1.push_back(*pos++);
-    // operacja - kolejny poziom zagniezdzenia
-    if(czyOperacja(*pos))
-        poziom++; // 2
-    wek2.push_back(*pos++);
-    // operacja - kolejny poziom zagniezdzenia
-    wek3.push_back(*pos++);
-    if(czyOperacja(*pos))
-        poziom++; // 4
-    wek3.push_back(*pos++);
-    // operacja - kolejny poziom zagniezdzenia
-    wek4.push_back(*pos++);
-    wek4.push_back(*pos++);
-    poziom--; // 3
-    // brak operacji - wracamy
-    // wek3
-    poziom--; // 2
-    // koniec z tamtymi rowniez
-    // wek2
-    wek2.push_back(*pos++);
-    poziom++; // 3
-    // operacja - kolejny poziom zagniezdzenia
-    wek3.push_back(*pos++);
-    wek3.push_back(*pos++);
-    poziom--; // 2
-    // brak operacji - wracamy
-    // wek2
-    poziom--; // 1
-    // brak operacji - wracamy
-    // wek1
-    // KONIEC BO WEK1
 
-    for(const auto& elem : wek1)
-    {
-        cout << elem;
-    }
-    cout << endl;
-    for (const auto &elem : wek2)
-    {
-        cout << elem;
-    }
-    cout << endl;
-    for (const auto &elem : wek3)
-    {
-        cout << elem;
-    }
-    cout << endl;
-    for (const auto &elem : wek4)
-    {
-        cout << elem;
-    }
-    cout << endl;
+    wyjscie.push_back(*pos);
+    kopia.erase(pos);
 
-    return kopia;
+
+    int ignore = 0;
+    bool z_while = false;
+
+    while (!kopia.empty())
+    {
+        pos = kopia.begin();
+        char znak = *pos;
+
+        while (ignore != 0)
+        {
+            smietnik.push_back(*pos);
+            if (czyOperacja(znak))
+            {
+                ignore += 2;
+            }
+
+            pos++;
+            znak = *pos;
+            ignore--;
+            z_while = true;
+        }
+        
+
+        wyjscie.push_back(*pos);
+        kopia.erase(pos);
+
+        if (czyOperacja(znak) && !z_while)
+        {
+            ignore += 2;
+        }
+        z_while = false;
+
+        cout << "Smietnik: ";
+        wypisz(smietnik);
+
+        usun_podzespol(smietnik, kopia);
+
+        cout << "kopia: ";
+        wypisz(kopia);
+        //smietnik.clear();
+    }
+
+    return wyjscie;
 }
 //****************************************************************************************************************
 int main()
