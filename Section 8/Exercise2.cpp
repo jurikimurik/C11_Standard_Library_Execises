@@ -7,6 +7,14 @@
 #include <iterator>
 using namespace std;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+enum class tryb_pracy
+{
+    postfix = 0,
+    prefix
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+tryb_pracy tryb;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 vector<char> operacje = {'+', '-', '*', '/'};
 //****************************************************************************************************************
 bool czyOperacja(char znak)
@@ -41,10 +49,10 @@ void wybierz_tryb()
     switch (odpowiedz)
     {
     case 1:
-        // postfix
+        tryb = tryb_pracy::postfix;
         break;
     case 2:
-        // prefix
+        tryb = tryb_pracy::prefix;
         break;
     case 3:
         exit(0);
@@ -84,15 +92,23 @@ void wypisz(vector<char> zbior)
     cout << endl;
 }
 //****************************************************************************************************************
+vector<char> analizuj(vector<char> dane)
+{
+    vector<char> kopia(dane);
+
+    
+
+    return kopia;
+}
+//****************************************************************************************************************
 int main()
 {
     while(true)
     {
-        wybierz_tryb();
+        //wybierz_tryb();
 
-        vector<char> dane = wprowadz_dane();
+        vector<char> dane = {'/', '*', '2', '+', 'a', '3', '+', 'b', '4'}; //= wprowadz_dane();
 
-        wypisz(dane);
-        // wypisz(analizuj(dane));
+        wypisz(analizuj(dane));
     }
 }
