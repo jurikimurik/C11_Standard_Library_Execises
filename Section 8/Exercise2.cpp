@@ -96,19 +96,78 @@ vector<char> analizuj(vector<char> dane)
 {
     vector<char> kopia(dane);
 
-    
+    vector<char> wek1;
+    vector<char> wek2;
+    vector<char> wek3;
+    vector<char> wek4;
+
+    int poziom = 0;
+
+    auto pos = kopia.begin();
+    if(czyOperacja(*pos))
+        poziom++; // 1
+    wek1.push_back(*pos++);
+    // operacja - kolejny poziom zagniezdzenia
+    if(czyOperacja(*pos))
+        poziom++; // 2
+    wek2.push_back(*pos++);
+    // operacja - kolejny poziom zagniezdzenia
+    wek3.push_back(*pos++);
+    if(czyOperacja(*pos))
+        poziom++; // 4
+    wek3.push_back(*pos++);
+    // operacja - kolejny poziom zagniezdzenia
+    wek4.push_back(*pos++);
+    wek4.push_back(*pos++);
+    poziom--; // 3
+    // brak operacji - wracamy
+    // wek3
+    poziom--; // 2
+    // koniec z tamtymi rowniez
+    // wek2
+    wek2.push_back(*pos++);
+    poziom++; // 3
+    // operacja - kolejny poziom zagniezdzenia
+    wek3.push_back(*pos++);
+    wek3.push_back(*pos++);
+    poziom--; // 2
+    // brak operacji - wracamy
+    // wek2
+    poziom--; // 1
+    // brak operacji - wracamy
+    // wek1
+    // KONIEC BO WEK1
+
+    for(const auto& elem : wek1)
+    {
+        cout << elem;
+    }
+    cout << endl;
+    for (const auto &elem : wek2)
+    {
+        cout << elem;
+    }
+    cout << endl;
+    for (const auto &elem : wek3)
+    {
+        cout << elem;
+    }
+    cout << endl;
+    for (const auto &elem : wek4)
+    {
+        cout << elem;
+    }
+    cout << endl;
 
     return kopia;
 }
 //****************************************************************************************************************
 int main()
 {
-    while(true)
-    {
+
         //wybierz_tryb();
 
         vector<char> dane = {'/', '*', '2', '+', 'a', '3', '+', 'b', '4'}; //= wprowadz_dane();
 
         wypisz(analizuj(dane));
-    }
 }
