@@ -4,6 +4,7 @@
 #include <vector>
 #include <iterator>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 vector<string> zbior;
@@ -28,7 +29,7 @@ void wypisz_zbior()
 //******************************************************************************************************************************************************************************
 void wypisz_dzialania()
 {
-    cout << "1 - posortuj, 2 - wyznacz ilosc slow, 3 - wyznacz ilosc liter, 4 - wyjdz: ";
+    cout << "1 - posortuj, 2 - wyznacz ilosc slow, 3 - wyznacz ilosc liter, 4 - wyjdz." << endl;
 }
 //******************************************************************************************************************************************************************************
 bool wgraj_plik(string nazwa)
@@ -58,6 +59,24 @@ int pobierz_odpowiedz(string napis = "")
     return odp;
 }
 //******************************************************************************************************************************************************************************
+void sortowanie()
+{
+    int odpowiedz = pobierz_odpowiedz("Wybierz typ sortowania (1 - <, 2 - >): ");
+    switch (odpowiedz)
+    {
+    case 1:
+        sort(zbior.begin(), zbior.end());
+        break;
+    
+    case 2:
+        sort(zbior.begin(), zbior.end(), greater());
+    
+    default:
+        cout << "Nie zrozumialem polecenia." << endl;
+        break;
+    }
+}
+//******************************************************************************************************************************************************************************
 int main()
 {
 
@@ -71,13 +90,13 @@ int main()
         switch (odpowiedz)
         {
         case 1:
-           // sortowanie();
+            sortowanie();
             break;
         case 2:
-          //  cout << ilosc_slow();
+            //cout << ilosc_slow();
             break;
         case 3:
-           // cout << ilosc_liter();
+            //cout << ilosc_liter();
             break;
         case 4:
             exit(0);
