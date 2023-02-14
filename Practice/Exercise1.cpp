@@ -89,6 +89,7 @@ int ilosc_slow()
             else
                 return true;
         }), str.end());
+        return str;
     });
 
     return kopia.size();
@@ -103,9 +104,9 @@ int ilosc_liter()
         int w_tym_slowie = count_if(elem.begin(), elem.end(), [] (char znak) {
             if(znak > 64 && znak < 91 || znak > 96 && znak < 123)
             // bo litera
-                return false;
-            else
                 return true;
+            else
+                return false;
         });
         ilosc += w_tym_slowie;
     }

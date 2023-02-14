@@ -2,4 +2,4 @@ bin/
 .vscode/
 tempCodeRunnerFile.cpp
 liczby.data
-txt.tekst
+*.tekst
