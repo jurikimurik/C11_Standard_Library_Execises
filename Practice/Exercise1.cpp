@@ -77,6 +77,24 @@ void sortowanie()
     }
 }
 //******************************************************************************************************************************************************************************
+int ilosc_slow()
+{
+    vector<string> kopia(zbior);
+    
+    transform(kopia.begin(), kopia.end(), kopia.begin(), [] (string str) {
+        str.erase(remove_if(str.begin(), str.end(), [] (char znak) {
+            if(znak > 64 && znak < 91 || znak > 96 && znak < 123)
+            // bo litera
+                return false;
+            else
+                return true;
+        }), str.end());
+    });
+
+    return kopia.size();
+    
+}
+//******************************************************************************************************************************************************************************
 int main()
 {
 
