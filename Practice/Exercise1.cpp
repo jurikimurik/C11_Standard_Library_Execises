@@ -95,6 +95,24 @@ int ilosc_slow()
     
 }
 //******************************************************************************************************************************************************************************
+int ilosc_liter()
+{
+    int ilosc = 0;
+    for(const auto& elem : zbior)
+    {
+        int w_tym_slowie = count_if(elem.begin(), elem.end(), [] (char znak) {
+            if(znak > 64 && znak < 91 || znak > 96 && znak < 123)
+            // bo litera
+                return false;
+            else
+                return true;
+        });
+        ilosc += w_tym_slowie;
+    }
+
+    return ilosc;
+}
+//******************************************************************************************************************************************************************************
 int main()
 {
 
@@ -111,10 +129,10 @@ int main()
             sortowanie();
             break;
         case 2:
-            //cout << ilosc_slow();
+            cout << ilosc_slow() << endl;
             break;
         case 3:
-            //cout << ilosc_liter();
+            cout << ilosc_liter() << endl;
             break;
         case 4:
             exit(0);
