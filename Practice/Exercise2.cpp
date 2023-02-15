@@ -62,6 +62,8 @@ pair<bool, chrono::system_clock::time_point> runda(int ilosc_rund, kontener zb =
 
     //litera
     losowosc = rand() % slowo.size();
+    //potrzebujemy losowego znaku, ktory wystepuje PIERWSZYM
+    losowosc = slowo.find_first_of(slowo.at(losowosc));
     char znak = slowo.at(losowosc);
 
     cout << slowo << " - podaj na ktorym miejscu jest pierwsza litera \'" << znak << "\': ";
