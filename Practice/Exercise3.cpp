@@ -1,6 +1,7 @@
 // Zadanie 3 - Analizator tekstu v.2. Uzytkownik wprowadza tekst. Twoim zadaniem jest przeanalizowac go i wypisac ilosc kazdej z poszczegolnych liter.
 #include <iostream>
 #include <map>
+#include <string>
 #include <iterator>
 #include <algorithm>
 using namespace std;
@@ -32,7 +33,7 @@ map<char, int> analizuj(string text)
     {
         if(auto czy_pos = dane.find(*pos); czy_pos == dane.cend())
         {
-            dane.insert(make_pair(*pos, 1));
+            dane.insert(make_pair(tolower(*pos), 1));
         } else {
             czy_pos->second++;
         }
@@ -54,6 +55,7 @@ void wypisz_wyniki(map<char, int> dane)
 //****************************************************************************************************************************************************************
 int main()
 {
+    
         string text = wprowadz<string>("Wprowadz tekst: ");
         wypisz_wyniki(analizuj(text));   
 
