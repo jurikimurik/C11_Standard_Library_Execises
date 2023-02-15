@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iterator>
 #include <fstream>
+#include <chrono>
 using namespace std;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using jednostka = string;
@@ -47,7 +48,7 @@ bool wgraj_dane(string nazwa)
     return true;
 }
 //***************************************************************************************************************************************************************************
-bool runda(int ilosc_rund, kontener zb = zbior)
+pair<bool, chrono::system_clock::time_point> runda(int ilosc_rund, kontener zb = zbior)
 {
     srand(time(NULL));
     
@@ -64,15 +65,19 @@ bool runda(int ilosc_rund, kontener zb = zbior)
     char znak = slowo.at(losowosc);
 
     cout << slowo << " - podaj na ktorym miejscu jest pierwsza litera \'" << znak << "\': ";
+
+    //Liczymy czas - start
+    auto start_czas = chrono::system_clock::now();
+
     int odpowiedz = wprowadzenie<int>();
 
     if(odpowiedz == losowosc + 1)
     {
         cout << "Dobrze!" << endl;
-        return true;
+        return make_pair(true, start_czas);
     } else {
         cout << "Zle!" << endl;
-        return false;
+        return make_pair(false, start_czas);
     }
 
 
@@ -81,6 +86,22 @@ bool runda(int ilosc_rund, kontener zb = zbior)
 void wynik(int punktacja = punkty)
 {
     cout << "Zdobyles " << punktacja << " punktow! Brawo!" << endl;
+}
+//***************************************************************************************************************************************************************************
+int punktacja(pair<bool, chrono::system_clock::time_point> inforamcje)
+{
+    if(!inforamcje.first)
+        return 0;
+    
+    auto maksymalny_czas = chrono::seconds(5);
+    int wspolczynnik = 1000;
+
+    int maksymalna_punktacja = maksymalny_czas.count() * wspolczynnik;
+    int minimalna_punktacja = maksymalny_czas.count() * wspolczynnik / 10;
+    
+    int punkty = maksymalna_punktacja - chrono::duration_cast<chrono::milliseconds>((chrono::system_clock::now() - inforamcje.second)).count();
+
+    return punkty > 0 ? punkty : minimalna_punktacja;
 }
 //***************************************************************************************************************************************************************************
 int main()
@@ -92,9 +113,8 @@ int main()
     size_t ilosc_rund = wprowadzenie<size_t>("Wpisz ilosc rund: ");
 
     while(ilosc_rund > 0)
-    {
-        if(runda(ilosc_rund, zbior))
-            punkty += 100;
+    {   
+        punkty += punktacja(runda(ilosc_rund, zbior));
         ilosc_rund--;
     }
 
