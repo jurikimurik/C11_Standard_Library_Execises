@@ -2,6 +2,7 @@
 //odczytywac.
 #include <iostream>
 #include <list>
+#include <vector>
 #include <iterator>
 #include <algorithm>
 #include <fstream>
@@ -105,6 +106,30 @@ void wypisz_dzialania()
 }
 
 //******************************************************************************************************************************************************************
+void dodaj_lub_usun_zadania(lista& zadania)
+{
+    int odpowiedz = wprowadzenie<int>("1 - dodawanie, 2 - usuwanie: ");
+    lista nowe_zadania;
+    if(odpowiedz == 1)
+    {
+        nowe_zadania = pobierz_dzialania();
+        odpowiedz = wprowadzenie<int>("Gdzie chcesz ich dodac? Podaj numer:");
+
+        auto pos = zadania.begin();
+        advance(pos, odpowiedz);
+
+        zadania.splice(pos, nowe_zadania);
+    } else if(odpowiedz == 2) {
+        vector<lista::iterator> pozycje;
+        
+        
+
+    } else {
+        cout << "Niezrozumiale zadanie" << endl;
+    }
+}
+
+//******************************************************************************************************************************************************************
 int main()
 {
     lista zadania = stworz_poczatkowa_liste();
@@ -116,6 +141,18 @@ int main()
         int odpowiedz = wprowadzenie<int>("Wybierz dzialanie: ");
         switch (odpowiedz)
         {
+        case 1:
+            dodaj_lub_usun_zadania(zadania);
+            break;
+        case 2:
+            zmien_zadanie(zadania);
+            break;
+        case 3:
+            zamien_miejscami(zadania);
+            break;
+        case 4:
+            zapis_lub_odczyt(zadania);
+            break;
         case 5:
             exit(0);
             break;
