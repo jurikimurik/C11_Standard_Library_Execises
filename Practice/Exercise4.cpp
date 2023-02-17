@@ -142,12 +142,27 @@ void dodaj_lub_usun_zadania(lista& zadania)
         {
             zadania.erase(elem);
         }
-        
+
     } else {
         cout << "Niezrozumiale zadanie" << endl;
     }
 }
 
+//******************************************************************************************************************************************************************
+void zmien_zadanie(lista& zadania)
+{
+    int odpowiedz = wprowadzenie<int>("Podaj numer zadania, ktorego opis chcesz zmienic: ");
+    jednostka na_co_zmienic = wprowadzenie<jednostka>("Podaj zadanie: ");
+
+    auto pos = zadania.begin();
+    advance(pos, --odpowiedz);
+    auto pos_k = pos;
+    pos_k++;
+
+    cout << *pos << " - " << na_co_zmienic << endl;
+    replace(pos, pos_k, *pos, na_co_zmienic);
+    
+}
 //******************************************************************************************************************************************************************
 int main()
 {
@@ -164,7 +179,7 @@ int main()
             dodaj_lub_usun_zadania(zadania);
             break;
         case 2:
-            //zmien_zadanie(zadania);
+            zmien_zadanie(zadania);
             break;
         case 3:
             //zamien_miejscami(zadania);
