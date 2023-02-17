@@ -43,12 +43,14 @@ lista wczytaj_liste()
     while(true)
     {
         string text;
-        strm >> text;
+        getline(strm, text);
         if(!strm)
             break;
         else
             zadania.push_back(text);
     }
+
+    strm.close();
 
     return zadania;
 }
@@ -178,6 +180,50 @@ void zamien_miejscami(lista& zadania)
     iter_swap(pos_p, pos_d);
 }
 //******************************************************************************************************************************************************************
+void zapis(lista& zadania)
+{
+    string nazwa = wprowadzenie<string>("Podaj nazwe pliku bez roszerzenia .tasks: ");
+
+    nazwa += ".tasks";
+
+    ofstream strm(nazwa);
+    if(!strm)
+    {
+        cout << "Nie udalo sie otworzyc plik do zapisu!" << endl;
+        return;
+    }
+
+    for(const auto& elem: zadania)
+    {
+        strm << elem << endl;
+    }
+
+    strm.close();
+}
+//******************************************************************************************************************************************************************
+void zapis_lub_odczyt(lista& zadania)
+{
+    int odpowiedz = wprowadzenie<int>("1 - zapis, 2 - odczyt: ");
+    lista dodatkowo;
+    switch (odpowiedz)
+    {
+    case 1:
+        zapis(zadania);
+        break;
+    case 2:
+        dodatkowo = wczytaj_liste();
+        
+        if(!dodatkowo.empty())
+            zadania = dodatkowo;
+        else
+            cout << "Pusty. Nie wczytuje. " << endl;
+        break;
+    default:
+        cout << "Zadanie niezdefiniowane!" << endl;
+        break;
+    }
+}
+//******************************************************************************************************************************************************************
 int main()
 {
     lista zadania = stworz_poczatkowa_liste();
@@ -199,7 +245,7 @@ int main()
             zamien_miejscami(zadania);
             break;
         case 4:
-            //zapis_lub_odczyt(zadania);
+            zapis_lub_odczyt(zadania);
             break;
         case 5:
             exit(0);
