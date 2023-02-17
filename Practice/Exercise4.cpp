@@ -164,6 +164,20 @@ void zmien_zadanie(lista& zadania)
     
 }
 //******************************************************************************************************************************************************************
+void zamien_miejscami(lista& zadania)
+{
+    int ktory_p = wprowadzenie<int>("Wprowadz pozycje numer 1: ");
+    int ktory_d = wprowadzenie<int>("Wprowadz pozycje numer 2: ");
+
+    auto pos_p = zadania.begin();
+    auto pos_d = zadania.begin();
+
+    advance(pos_p, --ktory_p);
+    advance(pos_d, --ktory_d);
+
+    iter_swap(pos_p, pos_d);
+}
+//******************************************************************************************************************************************************************
 int main()
 {
     lista zadania = stworz_poczatkowa_liste();
@@ -182,7 +196,7 @@ int main()
             zmien_zadanie(zadania);
             break;
         case 3:
-            //zamien_miejscami(zadania);
+            zamien_miejscami(zadania);
             break;
         case 4:
             //zapis_lub_odczyt(zadania);
