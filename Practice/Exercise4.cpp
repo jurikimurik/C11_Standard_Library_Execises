@@ -31,7 +31,7 @@ string wprowadzenie(string napis)
 //******************************************************************************************************************************************************************
 bool sprawdzenie_pozycji(int& pozycja, lista& zadania)
 {
-    if(pozycja < 0 || pozycja > zadania.size())
+    if(pozycja <= 0 || pozycja > zadania.size())
     {
         return false;
     } else {
@@ -135,11 +135,11 @@ void dodaj_lub_usun_zadania(lista& zadania)
         while(true)
         {
             odpowiedz = wprowadzenie<int>("Gdzie chcesz ich dodac? Podaj numer:");
-            if(odpowiedz < 0 || odpowiedz >= zadania.size())
+            if(sprawdzenie_pozycji(odpowiedz, zadania))
             {
-                cout << "Zle podany numer." << endl;
-            } else {
                 break;
+            } else {
+                cout << "Zle podana pozycja." << endl;
             }
         }
 
@@ -153,13 +153,22 @@ void dodaj_lub_usun_zadania(lista& zadania)
         cout << "Podaj pozycje rozdzielajac ich spacjami i na koniec wprowadz 'q': ";
         while(true)
         {
-            int pozycja = wprowadzenie<int>();
-            if(!sprawdzenie_pozycji(pozycja, zadania) && cin)
+            int pozycja;
+            while (true)
             {
-                cout << "Zla pozycja: " << pozycja << endl;
-                cout << "Zacznij od nowa!" << endl;
-                pozycje.clear();
+                pozycja = wprowadzenie<int>();
+                if(!sprawdzenie_pozycji(pozycja, zadania) && cin)
+                {
+                    cout << "Zla pozycja: " << pozycja << endl;
+                    cout << "Powtorz!" << endl;
+                    string pozostalosc;
+                    getline(cin, pozostalosc);
+                } else {
+                    break;
+                }
             }
+            
+            
             if(!cin)
             {
                 cin.clear();
