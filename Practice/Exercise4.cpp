@@ -116,14 +116,33 @@ void dodaj_lub_usun_zadania(lista& zadania)
         odpowiedz = wprowadzenie<int>("Gdzie chcesz ich dodac? Podaj numer:");
 
         auto pos = zadania.begin();
-        advance(pos, odpowiedz);
+        advance(pos, --odpowiedz);
 
         zadania.splice(pos, nowe_zadania);
     } else if(odpowiedz == 2) {
         vector<lista::iterator> pozycje;
-        
-        
 
+        cout << "Podaj pozycje rozdzielajac ich spacjami i na koniec wprowadz 'q': ";
+        while(true)
+        {
+            int pozycja = wprowadzenie<int>();
+            if(!cin)
+            {
+                cin.clear();
+                cin.ignore();
+                break;
+            }
+
+            lista::iterator pos = zadania.begin();
+            advance(pos, --pozycja);
+            pozycje.push_back(pos);
+        }
+
+        for(auto& elem : pozycje)
+        {
+            zadania.erase(elem);
+        }
+        
     } else {
         cout << "Niezrozumiale zadanie" << endl;
     }
@@ -145,13 +164,13 @@ int main()
             dodaj_lub_usun_zadania(zadania);
             break;
         case 2:
-            zmien_zadanie(zadania);
+            //zmien_zadanie(zadania);
             break;
         case 3:
-            zamien_miejscami(zadania);
+            //zamien_miejscami(zadania);
             break;
         case 4:
-            zapis_lub_odczyt(zadania);
+            //zapis_lub_odczyt(zadania);
             break;
         case 5:
             exit(0);
