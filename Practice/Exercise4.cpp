@@ -29,9 +29,20 @@ string wprowadzenie(string napis)
     return zmienna;
 }
 //******************************************************************************************************************************************************************
+bool sprawdzenie_pozycji(int& pozycja, lista& zadania)
+{
+    if(pozycja < 0 || pozycja > zadania.size())
+    {
+        return false;
+    } else {
+        return true;
+    }
+}
+//******************************************************************************************************************************************************************
 lista wczytaj_liste()
 {
     string nazwa = wprowadzenie<string>("Podaj nazwe pliku bez rozszerzenia .tasks: ");
+    nazwa += ".tasks";
 
     ifstream strm(nazwa);
     if(!strm)
@@ -77,7 +88,10 @@ lista pobierz_dzialania(string napis = "")
 lista stworz_poczatkowa_liste()
 {
     cout << "1 - nowa lista, 2 - wczytaj liste. " << endl;
-    int odpowiedz = wprowadzenie<int>("Wybierz dzialanie: ");
+    
+    while(true)
+    {
+        int odpowiedz = wprowadzenie<int>("Wybierz dzialanie: ");
     switch (odpowiedz)
     {
     case 1:
@@ -90,6 +104,8 @@ lista stworz_poczatkowa_liste()
     default:
         break;
     }
+    }
+    
 }
 //******************************************************************************************************************************************************************
 void wypisz_liste(lista zadania)
@@ -115,7 +131,17 @@ void dodaj_lub_usun_zadania(lista& zadania)
     if(odpowiedz == 1)
     {
         nowe_zadania = pobierz_dzialania();
-        odpowiedz = wprowadzenie<int>("Gdzie chcesz ich dodac? Podaj numer:");
+
+        while(true)
+        {
+            odpowiedz = wprowadzenie<int>("Gdzie chcesz ich dodac? Podaj numer:");
+            if(odpowiedz < 0 || odpowiedz >= zadania.size())
+            {
+                cout << "Zle podany numer." << endl;
+            } else {
+                break;
+            }
+        }
 
         auto pos = zadania.begin();
         advance(pos, --odpowiedz);
@@ -128,6 +154,12 @@ void dodaj_lub_usun_zadania(lista& zadania)
         while(true)
         {
             int pozycja = wprowadzenie<int>();
+            if(!sprawdzenie_pozycji(pozycja, zadania) && cin)
+            {
+                cout << "Zla pozycja: " << pozycja << endl;
+                cout << "Zacznij od nowa!" << endl;
+                pozycje.clear();
+            }
             if(!cin)
             {
                 cin.clear();
@@ -153,7 +185,18 @@ void dodaj_lub_usun_zadania(lista& zadania)
 //******************************************************************************************************************************************************************
 void zmien_zadanie(lista& zadania)
 {
-    int odpowiedz = wprowadzenie<int>("Podaj numer zadania, ktorego opis chcesz zmienic: ");
+    int odpowiedz = 0;
+    while(true)
+    {
+        odpowiedz = wprowadzenie<int>("Podaj numer zadania, ktorego opis chcesz zmienic: ");
+        if(sprawdzenie_pozycji(odpowiedz, zadania))
+        {
+            break;
+        } else {
+            cout << "Zle podana pozycja" << endl;
+        }
+    }
+   
     jednostka na_co_zmienic = wprowadzenie<jednostka>("Podaj zadanie: ");
 
     auto pos = zadania.begin();
@@ -168,8 +211,30 @@ void zmien_zadanie(lista& zadania)
 //******************************************************************************************************************************************************************
 void zamien_miejscami(lista& zadania)
 {
-    int ktory_p = wprowadzenie<int>("Wprowadz pozycje numer 1: ");
-    int ktory_d = wprowadzenie<int>("Wprowadz pozycje numer 2: ");
+    int ktory_p; 
+    int ktory_d;
+    while(true)
+    {
+        ktory_p = wprowadzenie<int>("Wprowadz pozycje numer 1: ");
+        if(sprawdzenie_pozycji(ktory_p, zadania))
+        {
+            break;
+        } else {
+            cout << "Zla pozycja." << endl;
+        }
+    }
+    while (true)
+    {
+        ktory_d = wprowadzenie<int>("Wprowadz pozycje numer 2: ");
+        if(sprawdzenie_pozycji(ktory_d, zadania))
+        {
+            break;
+        } else {
+            cout << "Zla pozycja." << endl;
+        }
+    }
+    
+    
 
     auto pos_p = zadania.begin();
     auto pos_d = zadania.begin();
@@ -226,7 +291,15 @@ void zapis_lub_odczyt(lista& zadania)
 //******************************************************************************************************************************************************************
 int main()
 {
-    lista zadania = stworz_poczatkowa_liste();
+    
+    lista zadania;
+
+    while(zadania.empty())
+    {
+        zadania = stworz_poczatkowa_liste();
+        if(zadania.empty())
+            cout << "Lista nie moze byc pusta!" << endl;
+    }
 
     while(true)
     {
