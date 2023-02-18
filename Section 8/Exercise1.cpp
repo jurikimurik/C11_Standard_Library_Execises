@@ -44,21 +44,12 @@ kontener pobierz_liczby(string napis = "")
     cout << napis;
 
     kontener liczby;
+
     copy(istream_iterator<int>(cin), istream_iterator<int>(), inserter(liczby, liczby.begin()));
     cin.clear();
     cin.ignore();
-    return liczby;
-}
 
-//***************************************************************************************************************************************
-kontener::iterator przestaw_index(kontener& zbior, int gdzie = 0)
-{
-    kontener::iterator pos = zbior.begin();
-    for (int i = 0; i < gdzie; i++)
-    {
-        pos++;
-    }
-    return pos;
+    return liczby;
 }
 
 //***************************************************************************************************************************************
@@ -66,6 +57,8 @@ bool praca_z_plikiem(kontener &zbior, tryb_pracy tryb)
 {
     if(tryb == tryb_pracy::zapis) {
         ofstream strm("liczby.data");
+        if(!strm)
+            return false;
 
         copy(zbior.begin(), zbior.end(), ostream_iterator<int>(strm, " "));
 
@@ -74,8 +67,11 @@ bool praca_z_plikiem(kontener &zbior, tryb_pracy tryb)
             return true;
         else
             return false;
+
     } else if (tryb == tryb_pracy::odczyt) {
         ifstream strm("liczby.data");
+        if(!strm)
+            return false;
 
         zbior.clear();
 
@@ -137,7 +133,7 @@ void wypisz(const kontener &zbior, int liczba_kolumn = 25, int odstep_pomiedzy =
         for (int x = 0; x < liczba_kolumn; ++x)
         {
             cout << setw(szerokosc_poj_liczby) << *pos;
-            pos++;
+            next(pos);
         }
         cout << endl;
     }
@@ -334,8 +330,8 @@ bool usuwanie_uniwersalne(kontener& zbior, tryb_usuwania jaki)
         arg1 = pobierz_liczbe("Podaj poczatkowy index (wlacznie): ");
         arg2 = pobierz_liczbe("Podaj gorny index (wlacznie): ");
 
-        pos_b = przestaw_index(zbior, --arg1);
-        pos_e = przestaw_index(zbior, arg2);
+        advance(pos_b, --arg1);
+        advance(pos_e, arg2);
     }
 
     usuwanie_proces(zbior, pos_b, pos_e, funkcja, jaki);
@@ -386,7 +382,7 @@ bool wstawianie_liczb(kontener &zbior, bool czy_losowe = true)
     case 1:
         break;
     case 2:
-        pos = przestaw_index(zbior, liczby.size() / 2);
+        advance(pos, liczby.size() / 2);
         break;
     case 3:
         pos = zbior.end();
@@ -394,7 +390,7 @@ bool wstawianie_liczb(kontener &zbior, bool czy_losowe = true)
 
     case 4:
         odpowiedz = pobierz_liczbe("Wprowadz index: ");
-        pos = przestaw_index(zbior, odpowiedz);
+        advance(pos, odpowiedz);
         break;
 
     default:
