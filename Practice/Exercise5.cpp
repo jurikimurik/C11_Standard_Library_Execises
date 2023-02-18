@@ -64,21 +64,33 @@ void wypisz_liczby(kontener liczby)
     cout << endl;
 }
 //********************************************************************************************************************************
+void sortowanie(kontener& liczby)
+{
+    int odpowiedz = wprowadzenie<int>("1 - <, 2 - >: ");
+
+    if (odpowiedz != 1)
+        liczby.sort(greater<jednostka>());
+    else
+        liczby.sort();
+}
+//********************************************************************************************************************************
 int main()
 {
     kontener liczby = daj_liczby_losowe();
 
     while(true)
     {
-        wypisz_dzialania();
         wypisz_liczby(liczby);
+        wypisz_dzialania();
+        
         int odpowiedz = wprowadzenie<int>("Wybierz dzialanie: ");
 
         switch (odpowiedz)
         {
         case 1:
-            /* code */
+            sortowanie(liczby);
             break;
+
         case 2:
             /* code */
             break;
