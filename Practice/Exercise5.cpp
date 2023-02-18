@@ -101,6 +101,19 @@ void zapis_lub_odczyt(kontener& liczby)
     }
 }
 //********************************************************************************************************************************
+void wstawianie(kontener& liczby)
+{
+    kontener nowe_liczby = daj_liczby_losowe();
+
+    int podaj_gdzie = wprowadzenie<int>("Podaj gdzie mam wstawic liczby: ");
+    --podaj_gdzie;
+
+    auto pos = liczby.begin();
+    advance(pos, podaj_gdzie);
+
+    copy(nowe_liczby.begin(), nowe_liczby.end(), inserter(liczby, liczby.begin()));
+}
+//********************************************************************************************************************************
 int main()
 {
     kontener liczby = daj_liczby_losowe();
@@ -122,7 +135,7 @@ int main()
             zapis_lub_odczyt(liczby);
             break;
         case 3:
-            /* code */
+            wstawianie(liczby);
             break;
         case 4:
             exit(0);
