@@ -74,6 +74,33 @@ void sortowanie(kontener& liczby)
         liczby.sort();
 }
 //********************************************************************************************************************************
+void zapis_lub_odczyt(kontener& liczby)
+{
+    int odpowiedz = wprowadzenie<int>("1 - zapis, 2 - odczyt: ");
+
+    if(odpowiedz == 1)
+    {
+        ofstream strm("liczby.data");
+
+        for(const auto& elem : liczby)
+        {
+            strm << elem << endl;
+        }
+
+        cout << "Zapisano do liczby.data" << endl;
+        strm.close();
+    }
+    else if (odpowiedz == 2)
+    {
+        ifstream strm("liczby.data");
+
+        liczby.clear();
+
+        copy(istream_iterator<jednostka>(strm), istream_iterator<jednostka>(), inserter(liczby, liczby.begin()));
+        strm.close();
+    }
+}
+//********************************************************************************************************************************
 int main()
 {
     kontener liczby = daj_liczby_losowe();
@@ -92,7 +119,7 @@ int main()
             break;
 
         case 2:
-            /* code */
+            zapis_lub_odczyt(liczby);
             break;
         case 3:
             /* code */
