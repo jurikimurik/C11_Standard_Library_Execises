@@ -1,0 +1,1 @@
+// Zadanie 3 - Kalkulator zbiorowy. Niech uzytkownik wprowadzi n liczb. Nastpenie pozwol uzytkownikowi do kazdej z tych liczb: dodac, odjac, pomnozyc przez, podzielic przez. Uzyj w tym celu bind().

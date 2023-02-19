@@ -1,0 +1,1 @@
+// Zadanie 4 - Kalkulator zbiorowy v.2. Niech uzytkownik wprowadzi n liczb. Nastpenie pozwol uzytkownikowi do kazdej z tych liczb: dodac, odjac, pomnozyc przez, podzielic przez. Uzyj w tym celu lambd!

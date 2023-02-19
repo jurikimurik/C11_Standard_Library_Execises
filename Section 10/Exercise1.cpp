@@ -1,0 +1,2 @@
+// Zadanie 1 - Sortowanie Skrzyń. Stworz wlasny typ reprezentujacy skrzynie a nastepnie stworz kontener STL typu set, gdzie zaladujesz kilka takich skrzyn oraz przekazesz kryterium sortowania w postaci
+// obiektu funkcyjnego, zeby set prawidlowo posortowal skrzynie. (Moga byc od najlzejszej do najciezszej)
