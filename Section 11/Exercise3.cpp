@@ -53,7 +53,9 @@ void wypisz_jako_stog(vector<int> liczby)
         cout << *pos;
         wypisano++;
 
-        for (int x = 0; x <= stary_odstep && i != 0 && wypisano != licznik; ++x)
+        int dlugosc_liczby = to_string(*pos).size();
+
+        for (int x = 0; x <= stary_odstep - dlugosc_liczby + 1 && i != 0 && wypisano != licznik; ++x)
         {
             cout << " ";
         }
