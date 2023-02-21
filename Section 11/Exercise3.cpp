@@ -23,23 +23,52 @@ vector<int> pobierz_liczby()
 void wypisz_jako_stog(vector<int> liczby)
 {
     make_heap(liczby.begin(), liczby.end());
+    
+    int ilosc_poziomow = 0;
+    int mnoznik = 1;
+    while (mnoznik <= liczby.size())
+    {
+        mnoznik *= 2;
+        ilosc_poziomow++;
+    }
+
+    int odstep = 1;
+    for (int i = 2; i < ilosc_poziomow; ++i)
+    {
+        odstep = odstep * 2 + 2;
+    }
+
+    cout << "Ilosc poziomow: " << ilosc_poziomow << endl;
+    cout << "Odstep: " << odstep << endl;
 
     int licznik = 1;
-    int ilosc_spacji = 20;
-    int powtorzenia = 1;
     auto pos = liczby.begin();
-    for (int i = 0, wypisano = 0; i < liczby.size(); ++i, pos++)
+    for (int i = 0, stary_odstep = odstep, wypisano = 0; i < liczby.size(); ++i, pos++)
     {
+        for (int x = 0; x < odstep && wypisano == 0; ++x)
+        {
+            cout << " ";
+        }
 
-        cout << *pos << " ";
+        cout << *pos;
         wypisano++;
 
-        if(wypisano == licznik)
+        for (int x = 0; x < stary_odstep && i != 0 && wypisano != licznik; ++x)
         {
-           cout << endl;
-           wypisano = 0;
-           licznik *= 2;
+            cout << " ";
         }
+
+            if (wypisano == licznik)
+            {
+                cout << endl;
+                wypisano = 0;
+                licznik *= 2;
+
+                stary_odstep = odstep;
+                odstep = (odstep - 2) / 2;
+                if (odstep < 0)
+                    odstep = 0;
+            }
     }
 }
 //************************************************************************************************************************************
