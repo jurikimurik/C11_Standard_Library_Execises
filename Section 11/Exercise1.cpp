@@ -1,0 +1,2 @@
+// Zadanie 1 - Poszukiwacz. Masz n liczb losowych. Pozwol uzytkownikowi znalezc interesujace jego liczby i wypisac ich na ekranie. 
+// Poszukiwanie liczb ma sie odbyc wedlug okreslonych regul, takich jak: 1. modulo, 2. zakres.

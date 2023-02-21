@@ -1,0 +1,1 @@
+// Zadanie 3 - Stog. Z zadanych liczb przez uzytkownika stworz stog i wypisz go na ekranie.
