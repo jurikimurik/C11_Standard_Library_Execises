@@ -1,0 +1,2 @@
+// Zadanie 6 - Inwentaryzacja. Wpisz przedmioty w postaci „przedmiot - ilosc”. Takie same przedmioty automatycznie do 
+// siebie się dodają a na końcu wypisz wynik (liste) wszystkich przedmiotów i ich ilosc.

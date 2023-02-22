@@ -1,0 +1,1 @@
+// Zadanie 5 - Prosty edytor tekstu. Możesz wpisać tekst na początek, środek i koniec. Rowniez obliczyć ilość liter, ilość słów.
