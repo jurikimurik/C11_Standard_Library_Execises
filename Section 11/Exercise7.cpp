@@ -1,0 +1,3 @@
+// Zadanie 7 - Zgadywanka. Pozwol uzytkownikowi zaladowac zbior slow. Nastepnie neich wprowadzi ilosc rund. Sens rozrywki polega na tym, ze
+// zostaje wypisane slowo bez jakiejs jego czesci. Poczatkowej, srodkowej lub koncowej. Ta czesc zostaje wypisana pod slowem. Uzytkownik
+// musi wpisac gdzie trzeba ta czesc wpisac, by dostac sensowne slowo. Za kazda poprawna odpowiedz dostaje punkt. Na koniec wyswietl wynik.

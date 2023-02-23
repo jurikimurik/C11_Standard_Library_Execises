@@ -1,0 +1,2 @@
+// Zadanie 8 - Zagadki. Niech uzytkownik wprowadzi zbior zagadek, gdzie najpierw idzie linijka zagadki, a pod nim jest odpowiedz w formie
+// tekstu lub liczby. Uzytkownik zadaje ilosc rund i musi dobrze odpowiedziec na zagadki. Pod koniec wypisz wynik uzytkownika.
