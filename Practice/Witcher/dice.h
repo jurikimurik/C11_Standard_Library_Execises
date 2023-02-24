@@ -27,5 +27,21 @@ class Dice
         // Konstruktor z parameterem typu int do reprezentacji
         Dice(int kosc) : rodzaj_kosci(static_cast<reprezentacja>(kosc)) {}
 
+        void zmien_rodzaj(reprezentacja rodzaj)
+        {
+            rodzaj_kosci = rodzaj;
+        }
+
+        void zmien_rodzaj(int rodzaj) 
+        {
+            rodzaj_kosci = static_cast<reprezentacja>(rodzaj);
+        }
+
         std::string daj_wizualna_reprezentacje();
+
+        void odswiez_wizualna_reprezentacje();
+
+        
+
+        
 };

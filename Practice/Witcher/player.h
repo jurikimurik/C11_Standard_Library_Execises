@@ -62,4 +62,6 @@ class Player
 
             return potrzebne_koscie;
         }
+
+        friend std::ostream &operator<<(std::ostream &strm, Player &gracz);
 };

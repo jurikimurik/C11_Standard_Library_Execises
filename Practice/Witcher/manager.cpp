@@ -24,4 +24,12 @@ void GameManager::rozpocznij_gre()
 {
     // Niech zyje losowosc!
     srand(time(NULL));
+
+    string imie = wprowadzenie<string>("Wprowadz imie gracza: ");
+    int ilosc_kosci = wprowadzenie<int>("Wprowadz ilosc kosci: ");
+
+    Player gracz(imie, false, ilosc_kosci);
+    cout << gracz << endl;
+
+    return;
 }
