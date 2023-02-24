@@ -1,0 +1,4 @@
+// Zadanie: Gra w kosci. I etap. Stworz najpierw podstawe do gry kosci. Zaprojektuj obiekty kosci i daj pojedynczemu graczowi ich 6. 
+// Nastepnie stworz mechanike rzucania kosci, ktora wydaje losowe liczby od 1 do 6. II etap. Stworz podsumowanie punktow dla gracza przy
+// takim rzucie. Stworz rowniez gracza przeciwnika. Przetestuj dzialanie programu. III etap. Stworz mozliwosc przerzutu kosci, dodaj
+// pieniadze i ewentualnie stworz mozliwosc grania w wiekszym gronie, gdzie sterowanie bedzie albo komputerem albo graczem.
