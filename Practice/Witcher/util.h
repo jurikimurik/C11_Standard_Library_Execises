@@ -5,7 +5,7 @@
 using namespace std;
 //************************************************************************************************************
 template <typename T>
-inline T wprowadzenie(string napis)
+inline T wprowadzenie(string napis = "")
 {
     cout << napis;
     T zmienna;

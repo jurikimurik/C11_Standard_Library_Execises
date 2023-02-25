@@ -41,8 +41,8 @@ auto GameManager::daj_dzialania(Player &gracz)
 {
     para_funkcjaGracza_opisFunkcji mozliwosci;
 
-    mozliwosci.first.push_back(&Player::rzucz_kosci);
-    mozliwosci.second.push_back("1 - Rzut koscmi");
+    mozliwosci.first.push_back(&Player::przerzut_okreslonych);
+    mozliwosci.second.push_back("1 - Przerzut niektorych kosci");
 
     mozliwosci.first.push_back(&Player::pas);
     mozliwosci.second.push_back("2 - Pasowanie");
