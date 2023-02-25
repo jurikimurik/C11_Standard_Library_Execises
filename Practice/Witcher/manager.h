@@ -1,5 +1,9 @@
+#ifndef MANAGER
+#define MANAGER
+
 #include <vector>
 #include "player.h"
+#include "util.h"
 //***********************************************************************************************
 using wskazniki_na_funkcje = std::vector<void (Player::*)()>;
 //-----------------------------------------------|||||||||---------------------------------------
@@ -21,3 +25,5 @@ class GameManager
         void koniec_i_zwyciezca(const Player &gracz);
         void wypisz_dzialania(para_funkcjaGracza_opisFunkcji para);
 };
+
+#endif

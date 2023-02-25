@@ -1,3 +1,6 @@
+#ifndef DICE
+#define DICE
+
 #include <deque>
 #include <string>
 ////////////////////////////////////////////////////////////////////////////
@@ -44,3 +47,5 @@ class Dice
 
         friend std::ostream &operator<<(std::ostream &strm, Dice &kosc);
 };
+
+#endif

@@ -16,3 +16,8 @@ void Player::rzucz_kosci()
         randomizator(elem);
     }
 }
+//***************************************************************************************************************
+void Player::przerzut_okreslonych()
+{
+    
+}

@@ -1,3 +1,6 @@
+#ifndef PLAYER
+#define PLAYER
+
 #include <list>
 #include <string>
 #include <iterator>
@@ -78,4 +81,9 @@ class Player
 
         ///////////////////////////////////////
         void pas() {}
+
+        ///////////////////////////////////////
+        void przerzut_okreslonych();
 };
+
+#endif

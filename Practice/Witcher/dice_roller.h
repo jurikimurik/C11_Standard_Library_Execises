@@ -1,3 +1,6 @@
+#ifndef DICE_ROLLER
+#define DICE_ROLLER
+
 #include "dice.h"
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Obiekt funkcyjny do losowania kosci
@@ -14,3 +17,5 @@ class Dice_Roller
         kosc.zmien_rodzaj(static_cast<reprezentacja>(rand() % 6 + 1));
     }
 };
+
+#endif
