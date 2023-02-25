@@ -1,4 +1,5 @@
 #include <deque>
+#include <string>
 ////////////////////////////////////////////////////////////////////////////
 enum class reprezentacja
 {
@@ -41,7 +42,5 @@ class Dice
 
         void odswiez_wizualna_reprezentacje();
 
-        
-
-        
+        friend std::ostream &operator<<(std::ostream &strm, Dice &kosc);
 };

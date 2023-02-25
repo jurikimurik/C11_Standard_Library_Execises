@@ -8,3 +8,11 @@ ostream& operator<< (ostream& strm, Player& gracz)
     return strm;
 }
 //***************************************************************************************************************
+void Player::rzucz_kosci()
+{
+    Dice_Roller randomizator;
+    for(auto& elem : koscie_gracza)
+    {
+        randomizator(elem);
+    }
+}

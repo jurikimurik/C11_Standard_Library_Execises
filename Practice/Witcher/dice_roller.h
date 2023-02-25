@@ -3,6 +3,8 @@
 //Obiekt funkcyjny do losowania kosci
 class Dice_Roller
 {
+    public:
+    
     // Konstruktor domniemany
     Dice_Roller() {}
 

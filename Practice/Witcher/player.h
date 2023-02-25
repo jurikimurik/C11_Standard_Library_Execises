@@ -1,7 +1,7 @@
 #include <list>
 #include <string>
 #include <iterator>
-#include "dice.h"
+#include "dice_roller.h"
 ////////////////////////////////////////////////////////////////////////////
 using rodzaj_kontenera = std::list<Dice>;
 ////////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ class Player
         Player(std::string imie, bool czy_k, int ilosc) : nazwa_gracza(imie), czy_komputer(czy_k), ilosc_kosci(ilosc) {}
 
         ///////////////////////////////////////
-        auto daj_imie()
+        auto daj_imie() const
         {
             return nazwa_gracza;
         }
@@ -33,13 +33,13 @@ class Player
         }
 
         ///////////////////////////////////////
-        bool czy_jest_komputerem()
+        bool czy_jest_komputerem() const
         {
             return czy_komputer;
         }
 
         ///////////////////////////////////////
-        auto daj_koscie()
+        auto daj_koscie() const
         {
             return koscie_gracza;
         }
@@ -63,5 +63,9 @@ class Player
             return potrzebne_koscie;
         }
 
+        ///////////////////////////////////////
         friend std::ostream &operator<<(std::ostream &strm, Player &gracz);
+
+        ///////////////////////////////////////
+        void rzucz_kosci();
 };
