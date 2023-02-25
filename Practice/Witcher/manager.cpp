@@ -35,10 +35,16 @@ void GameManager::rozpocznij_gre()
     // Niech zyje losowosc!
     srand(time(NULL));
 
-    string imie = wprowadzenie<string>("Wprowadz imie gracza: ");
-    int ilosc_kosci = wprowadzenie<int>("Wprowadz ilosc kosci: ");
+    int ilosc_graczy = wprowadzenie<int>("Wprowadz ilosc graczy: ");
 
-    gracze.insert(gracze.begin(), Player(imie, false, ilosc_kosci));
+    while(ilosc_graczy-- > 0)
+    {
+        string imie = wprowadzenie<string>("Wprowadz imie gracza: " );
+        int ilosc_kosci = wprowadzenie<int>("Wprowadz ilosc kosci: ");
+        bool czy_k = wprowadzenie<int>("1 - Gracz, 2 - Komputer: ");
+
+        gracze.insert(gracze.end(), Player(imie, czy_k, ilosc_kosci));
+    }
 
     zacznij_kolejna_runde();
 }
@@ -55,15 +61,20 @@ void GameManager::zacznij_kolejna_runde()
         wypisz_wynik_rzutu(elem);
     }
 
-    cout << "Co chcesz zrobic? 1 - powtorka, 2 - wyjscie. " << endl;
-    int odpowiedz = wprowadzenie<int>("Wybierz dzialanie: ");
-    switch (odpowiedz)
+    for(auto& elem : gracze)
     {
-    case 1:
-        zacznij_kolejna_runde();
-        break;
-
-    default:
-        break;
+        ruch_gracza(elem);
     }
+
+    wypisz_wyniki();
+
+    for(const auto& elem : gracze)
+    {
+        if(ilosc_rund == elem.daj_ilosc_wygranych())
+        {
+            koniec_i_zwyciezca(elem);
+        }
+    }
+
+    zacznij_kolejna_runde();
 }

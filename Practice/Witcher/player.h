@@ -12,6 +12,7 @@ class Player
         bool czy_komputer;
         short ilosc_kosci;
         rodzaj_kontenera koscie_gracza = wez_swoje_koscie();
+        int ilosc_wygranych = 0;
 
     public:
         // Konstruktor domniemany tworzy komputerowego gracza
@@ -61,6 +62,12 @@ class Player
             }
 
             return potrzebne_koscie;
+        }
+
+        ///////////////////////////////////////
+        auto daj_ilosc_wygranych() const
+        {
+            return ilosc_wygranych;
         }
 
         ///////////////////////////////////////
