@@ -1,5 +1,6 @@
 #include "manager.h"
 #include <iostream>
+#include <functional>
 using namespace std;
 //***********************************************************************************************
 template <typename T>
@@ -12,7 +13,7 @@ T wprowadzenie(std::string napis = "")
 }
 //***********************************************************************************************
 template <>
-string wprowadzenie(std::string napis)
+string wprowadzenie(std::string napis) 
 {
     cout << napis;
     string zmienna;
@@ -49,11 +50,80 @@ void GameManager::rozpocznij_gre()
     zacznij_kolejna_runde();
 }
 //***********************************************************************************************
+void GameManager::ruch_komputera(Player& gracz)
+{
+    gracz.rzucz_kosci();
+}
+//***********************************************************************************************
+auto GameManager::daj_dzialania(Player &gracz)
+{
+    para_funkcjaGracza_opisFunkcji mozliwosci;
+
+    mozliwosci.first.push_back(&Player::rzucz_kosci);
+    mozliwosci.second.push_back("1 - Rzut koscmi");
+
+    mozliwosci.first.push_back(&Player::pas);
+    mozliwosci.second.push_back("2 - Pasowanie");
+
+    return mozliwosci;
+}
+//***********************************************************************************************
+void GameManager::wypisz_dzialania(para_funkcjaGracza_opisFunkcji para)
+{
+    for(const auto& elem : para.second)
+    {
+        cout << elem << ", ";
+    }
+    cout << endl;
+}
+//***********************************************************************************************
+bool zrob_dzialanie(int odp, Player& gracz, para_funkcjaGracza_opisFunkcji& para)
+{
+    wskazniki_na_funkcje mozliwosci = para.first;
+    auto wsk = mozliwosci.at(odp);
+
+    (gracz.*wsk)();
+    return true;
+}
+//***********************************************************************************************
+void GameManager::ruch_gracza(Player& gracz)
+{
+    if(!gracz.czy_jest_komputerem())
+    {
+        ruch_komputera(gracz);
+        return;
+    }
+
+    auto mozl = daj_dzialania(gracz);
+    wypisz_dzialania(mozl);
+
+    while(true)
+    {
+        int odpowiedz = wprowadzenie<int>("Wybierz dzialanie: ");
+        if(zrob_dzialanie(--odpowiedz, gracz, mozl))
+            break;
+    }
+}
+//***********************************************************************************************
+void GameManager::wyniki()
+{
+    cout << "\n\tWYNIKI: " << endl;
+    for (const auto &elem : gracze)
+    {
+        wypisz_wynik_rzutu(elem);
+    }
+}
+//***********************************************************************************************
+void GameManager::koniec_i_zwyciezca(const Player& gracz)
+{
+    cout << "Wygrywa " << gracz.daj_imie() << "! Kongratulacje!" << endl;
+}
+//***********************************************************************************************
 void GameManager::zacznij_kolejna_runde()
 {
     ilosc_rund++;
 
-    cout << "Zaczynamy runde numer " << ilosc_rund << "!" << endl;
+    cout << "\n\n\tZaczynamy runde numer " << ilosc_rund << "!" << endl;
 
     for(auto& elem : gracze)
     {
@@ -66,13 +136,14 @@ void GameManager::zacznij_kolejna_runde()
         ruch_gracza(elem);
     }
 
-    wypisz_wyniki();
+    wyniki();
 
     for(const auto& elem : gracze)
     {
         if(ilosc_rund == elem.daj_ilosc_wygranych())
         {
             koniec_i_zwyciezca(elem);
+            return;
         }
     }
 
