@@ -42,7 +42,7 @@ void GameManager::rozpocznij_gre()
     {
         string imie = wprowadzenie<string>("Wprowadz imie gracza: " );
         int ilosc_kosci = wprowadzenie<int>("Wprowadz ilosc kosci: ");
-        bool czy_k = wprowadzenie<int>("1 - Gracz, 2 - Komputer: ");
+        bool czy_k = wprowadzenie<int>("0 - Gracz, 1 - Komputer: ");
 
         gracze.insert(gracze.end(), Player(imie, czy_k, ilosc_kosci));
     }
@@ -88,7 +88,7 @@ bool zrob_dzialanie(int odp, Player& gracz, para_funkcjaGracza_opisFunkcji& para
 //***********************************************************************************************
 void GameManager::ruch_gracza(Player& gracz)
 {
-    if(!gracz.czy_jest_komputerem())
+    if(gracz.czy_jest_komputerem())
     {
         ruch_komputera(gracz);
         return;
