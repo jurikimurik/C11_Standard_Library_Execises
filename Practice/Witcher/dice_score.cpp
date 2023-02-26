@@ -1,12 +1,53 @@
 #include "dice_score.h"
 using namespace std;
 //************************************************************************************************************************************
-rodzaj_wygranej Dice_Score::jaka_wygrana(rodzaj_kontenera koscie)
+Dice_Score::rodzaj_wygranej Dice_Score::jaka_wygrana(rodzaj_kontenera koscie)
 {
-    
+    vector<int> numery;
+    for (const auto &elem : koscie)
+    {
+        numery.push_back(elem.daj_numer());
+    }
+    numery = {2, 3, 4, 5, 6};
+    sort(numery.begin(), numery.end());
+
+    int wynik = 1;
+    for(const auto& elem : numery)
+    {
+        int powtorzenia = count_if(numery.begin(), numery.end(), [&elem](int liczba)
+                               { return elem == liczba; });
+        if (powtorzenia > wynik)
+            wynik = powtorzenia;
+    }
+
+    rodzaj_wygranej jaka = static_cast<rodzaj_wygranej>(wynik);
+    if(jaka != rodzaj_wygranej::nic)
+        return jaka;
+
+    for (int i = 0; i < ilosc_kosci - 3; ++i)
+    {
+        bool po_kolei = true;
+        int pierwsza_liczba = numery.at(0);
+        for (int x = 0; x < numery.size() - 1; ++x)
+        {
+            if(numery.at(x+1) - numery.at(x) != 1)
+            {
+                po_kolei = false;
+                break;
+            }
+        }
+
+        if(po_kolei)
+        {
+            jaka = static_cast<rodzaj_wygranej>(ilosc_kosci + i + pierwsza_liczba);
+            break;
+        }
+    }
+
+    return jaka;
 }
 //************************************************************************************************************************************
-Dice_Score::Dice_Score(int generacja = 6)
+Dice_Score::Dice_Score(int k) : ilosc_kosci(k)
 {
     rodzaj_wygranej rodzaj = rodzaj_wygranej::nic;
     int wygrana = 0;

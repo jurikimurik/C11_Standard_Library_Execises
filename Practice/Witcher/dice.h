@@ -41,6 +41,11 @@ class Dice
             rodzaj_kosci = static_cast<reprezentacja>(rodzaj);
         }
 
+        int daj_numer() const
+        {
+            return static_cast<int>(rodzaj_kosci);
+        }
+
         std::string daj_wizualna_reprezentacje();
 
         void odswiez_wizualna_reprezentacje();

@@ -3,13 +3,15 @@
 #include <functional>
 using namespace std;
 //***********************************************************************************************
-void wypisz_wynik_rzutu(const Player& gracz)
+void GameManager::wypisz_wynik_rzutu(const Player& gracz)
 {
     cout << "Gracz " << gracz.daj_imie() << " wyrzucil: ";
     for(auto& elem : gracz.daj_koscie())
     {
         cout << elem << ", ";
     }
+    cout << endl
+         << "Jest to wynik: " << sprawdzac_wynikow.daj_nazwe_wyniku((gracz.daj_koscie()));
     cout << endl;
 }
 //***********************************************************************************************

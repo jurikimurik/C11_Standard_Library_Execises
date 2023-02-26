@@ -1,9 +1,10 @@
+#ifndef DICE_SCORE
+#define DICE_SCORE
+
 #include "player.h"
 #include "dice.h"
 #include <map>
 #include <vector>
-//********************************************************************************************************************
-vector<string> nazwy = {"Nic", "Swieta dwojka", "Potezna trojka", "Mnichowie", "Czworka dziewic", "Studenci", "Poker"};
 //********************************************************************************************************************
 class Dice_Score
 {
@@ -18,14 +19,27 @@ class Dice_Score
         od_2_do_6,
     };
 
+    vector<string> nazwy = {
+        "Nic",
+        "Swieta dwojka",
+        "Potezna trojka",
+        "Czworka dziewic",
+        "Poker",
+        "Studenci",
+        "Mnichowie",
+    };
+
 private:
     std::map<rodzaj_wygranej, int> nagrody;
     std::map<rodzaj_wygranej, string> nazwa_nagrody;
+    int ilosc_kosci;
 
 public:
-    Dice_Score(int generacja = 5);
+    Dice_Score(int k = 5);
 
     int daj_wynik(rodzaj_kontenera koscie);
     std::string daj_nazwe_wyniku(rodzaj_kontenera koscie);
-    rodzaj_wygranej jaka_wygrana(rodzaj_konetenra koscie);
+    rodzaj_wygranej jaka_wygrana(rodzaj_kontenera koscie);
 };
+
+#endif

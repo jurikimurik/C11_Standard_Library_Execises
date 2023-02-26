@@ -4,6 +4,7 @@
 #include <vector>
 #include "player.h"
 #include "util.h"
+#include"dice_score.h"
 //***********************************************************************************************
 using wskazniki_na_funkcje = std::vector<void (Player::*)()>;
 //-----------------------------------------------|||||||||---------------------------------------
@@ -14,6 +15,7 @@ class GameManager
     private:
         std::vector<Player> gracze;
         int ilosc_rund = 0;
+        Dice_Score sprawdzac_wynikow;
 
     public:
         void rozpocznij_gre();
@@ -24,6 +26,7 @@ class GameManager
         auto daj_dzialania(Player &gracz);
         void koniec_i_zwyciezca(const Player &gracz);
         void wypisz_dzialania(para_funkcjaGracza_opisFunkcji para);
+        void wypisz_wynik_rzutu(const Player &gracz);
 };
 
 #endif
