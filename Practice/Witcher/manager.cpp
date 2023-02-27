@@ -93,19 +93,20 @@ void GameManager::wyniki()
 {
     cout << "\n\tWYNIKI: " << endl;
 
-    multimap<int, Player, greater<>> wygrana_kazdego;
-    for (const auto &elem : gracze)
+    multimap<int, Player*, greater<>> wygrana_kazdego;
+    for (auto &elem : gracze)
     {
         wypisz_wynik_rzutu(elem);
-        wygrana_kazdego.insert(make_pair(sprawdzac_wynikow.daj_wynik(elem.daj_koscie()), elem));
+        wygrana_kazdego.insert(make_pair(sprawdzac_wynikow.daj_wynik(elem.daj_koscie()), &elem));
     }
 
-    cout << "Wygrywa: " << wygrana_kazdego.begin()->second.daj_imie() << "!" << endl;
+    cout << "Wygrywa: " << wygrana_kazdego.begin()->second->daj_imie() << "!" << endl;
+    wygrana_kazdego.begin()->second->wygrana();
 }
 //***********************************************************************************************
 void GameManager::koniec_i_zwyciezca(const Player& gracz)
 {
-    cout << "Wygrywa " << gracz.daj_imie() << "! Kongratulacje!" << endl;
+    cout << "Calkowicie wygrywa " << gracz.daj_imie() << "! Kongratulacje!" << endl;
 }
 //***********************************************************************************************
 void GameManager::zacznij_kolejna_runde()
@@ -129,7 +130,7 @@ void GameManager::zacznij_kolejna_runde()
 
     for(const auto& elem : gracze)
     {
-        if(ilosc_rund == elem.daj_ilosc_wygranych())
+        if(ilosc_rund_do_wygranej == elem.daj_ilosc_wygranych())
         {
             koniec_i_zwyciezca(elem);
             return;

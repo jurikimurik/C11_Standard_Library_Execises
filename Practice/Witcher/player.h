@@ -87,6 +87,12 @@ class Player
 
         ///////////////////////////////////////
         void przerzut_okreslonych();
+
+        ///////////////////////////////////////
+        void wygrana()
+        {
+            ++ilosc_wygranych;
+        }
 };
 
 #endif
