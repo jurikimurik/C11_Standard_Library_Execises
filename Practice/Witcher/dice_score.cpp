@@ -67,7 +67,13 @@ int Dice_Score::daj_wynik(rodzaj_kontenera koscie)
 {
     rodzaj_wygranej jaki = jaka_wygrana(koscie);
     auto pos = nagrody.find(jaki);
-    return pos->second;
+
+    int wygrana = pos->second;
+    for(const auto& elem : koscie)
+    {
+        wygrana += elem.daj_numer();
+    }
+    return wygrana;
 }
 
 //************************************************************************************************************************************
