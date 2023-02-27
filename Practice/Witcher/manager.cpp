@@ -92,10 +92,15 @@ void GameManager::ruch_gracza(Player& gracz)
 void GameManager::wyniki()
 {
     cout << "\n\tWYNIKI: " << endl;
+
+    map<int, Player> wygrana_kazdego;
     for (const auto &elem : gracze)
     {
         wypisz_wynik_rzutu(elem);
+        wygrana_kazdego.insert(make_pair(sprawdzac_wynikow.daj_wynik(elem.daj_koscie()), elem));
     }
+
+    cout << "Wygrywa: " << wygrana_kazdego.begin()->second.daj_imie() << "!" << endl;
 }
 //***********************************************************************************************
 void GameManager::koniec_i_zwyciezca(const Player& gracz)

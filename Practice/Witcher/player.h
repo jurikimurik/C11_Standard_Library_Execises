@@ -20,7 +20,7 @@ class Player
 
     public:
         // Konstruktor domniemany tworzy komputerowego gracza
-        Player() : nazwa_gracza("Przeciwnik"), czy_komputer(true), ilosc_kosci(6){}
+        Player() : nazwa_gracza("Przeciwnik"), czy_komputer(true), ilosc_kosci(5){}
 
         //Konstruktor sparametryzowany tworzy zwyklego gracza
         Player(std::string imie, bool czy_k, int ilosc) : nazwa_gracza(imie), czy_komputer(czy_k), ilosc_kosci(ilosc) {}

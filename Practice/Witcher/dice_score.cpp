@@ -8,7 +8,6 @@ Dice_Score::rodzaj_wygranej Dice_Score::jaka_wygrana(rodzaj_kontenera koscie)
     {
         numery.push_back(elem.daj_numer());
     }
-    numery = {2, 3, 4, 5, 6};
     sort(numery.begin(), numery.end());
 
     int wynik = 1;
