@@ -11,7 +11,7 @@ void GameManager::wypisz_wynik_rzutu(const Player& gracz)
         cout << elem << ", ";
     }
     cout << endl
-         << "Jest to wynik: " << sprawdzac_wynikow.daj_nazwe_wyniku((gracz.daj_koscie()));
+         << "Jest to wynik: " << sprawdzac_wynikow.daj_nazwe_wyniku((gracz.daj_koscie())) << " - " << sprawdzac_wynikow.daj_wynik(gracz.daj_koscie());
     cout << endl;
 }
 //***********************************************************************************************
@@ -93,7 +93,7 @@ void GameManager::wyniki()
 {
     cout << "\n\tWYNIKI: " << endl;
 
-    map<int, Player> wygrana_kazdego;
+    multimap<int, Player, greater<>> wygrana_kazdego;
     for (const auto &elem : gracze)
     {
         wypisz_wynik_rzutu(elem);
