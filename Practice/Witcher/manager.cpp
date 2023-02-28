@@ -40,7 +40,7 @@ void GameManager::ruch_komputera(Player& gracz)
     bool czy_najwiekszy = true;
     for(const auto& elem : gracze)
     {
-        if(wynik_komputera < sprawdzac_wynikow.daj_wynik(elem.daj_koscie()))
+        if (wynik_komputera < sprawdzac_wynikow.daj_wynik(elem.daj_koscie()))
         {
             czy_najwiekszy = false;
             break;
@@ -121,8 +121,26 @@ void GameManager::wyniki()
         wygrana_kazdego.insert(make_pair(sprawdzac_wynikow.daj_wynik(elem.daj_koscie()), &elem));
     }
 
-    cout << "Wygrywa: " << wygrana_kazdego.begin()->second->daj_imie() << "!" << endl;
-    wygrana_kazdego.begin()->second->wygrana();
+    auto pos = wygrana_kazdego.begin();
+    if(pos->first == next(pos)->first)
+    {
+        vector<const Player *> gracze_z_takimi_samymi_wynikami;
+        for (const auto &elem : wygrana_kazdego)
+        {
+            if(pos->first == elem.first)
+            {
+                gracze_z_takimi_samymi_wynikami.push_back(pos->second);
+            }
+        }
+
+        Player *u_kogo_najwiekszy = sprawdzac_wynikow.u_kogo_najwiekszy(gracze_z_takimi_samymi_wynikami);
+
+        cout << "Wygrywa: " << u_kogo_najwiekszy->daj_imie() << "!" << endl;
+        u_kogo_najwiekszy->wygrana();
+    }
+
+    cout << "Wygrywa: " << pos->second->daj_imie() << "!" << endl;
+    pos->second->wygrana();
 }
 //***********************************************************************************************
 void GameManager::koniec_i_zwyciezca(const Player& gracz)

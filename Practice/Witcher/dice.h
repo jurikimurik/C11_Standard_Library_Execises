@@ -51,6 +51,13 @@ class Dice
         void odswiez_wizualna_reprezentacje();
 
         friend std::ostream &operator<<(std::ostream &strm, Dice &kosc);
+
+        bool operator<(const Dice& x) const
+        {
+            return daj_numer() < x.daj_numer();
+        }
+
+        
 };
 
 #endif

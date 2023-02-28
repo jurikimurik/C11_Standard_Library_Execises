@@ -83,3 +83,20 @@ string Dice_Score::daj_nazwe_wyniku(rodzaj_kontenera koscie)
     auto pos = nazwa_nagrody.find(jaki);
     return pos->second;
 }
+
+//************************************************************************************************************************************
+Player* Dice_Score::u_kogo_najwiekszy(vector<const Player *> gracze_z_takimi_samymi_wynikami)
+{
+    vector<rodzaj_kontenera> koscie;
+    for(const auto& elem : gracze_z_takimi_samymi_wynikami)
+    {
+        koscie.push_back(elem->daj_koscie());
+    }
+
+    for(auto& elem : koscie)
+    {
+        elem.sort();
+    }
+
+    
+}
