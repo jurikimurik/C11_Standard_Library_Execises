@@ -72,7 +72,8 @@ bool zrob_dzialanie(int odp, Player& gracz, para_funkcjaGracza_opisFunkcji& para
 //***********************************************************************************************
 void GameManager::ruch_gracza(Player& gracz)
 {
-    if(gracz.czy_jest_komputerem())
+    cout << "\n\tTeraz jest ruch: " << gracz.daj_imie() << "!" << endl;
+    if (gracz.czy_jest_komputerem())
     {
         ruch_komputera(gracz);
         return;
@@ -87,6 +88,9 @@ void GameManager::ruch_gracza(Player& gracz)
         if(zrob_dzialanie(--odpowiedz, gracz, mozl))
             break;
     }
+
+    cout << endl
+         << endl;
 }
 //***********************************************************************************************
 void GameManager::wyniki()
