@@ -46,3 +46,8 @@ void Player::przerzut_okreslonych()
 
     rzucz_kosci(jakie_przerzucic);
 }
+//***************************************************************************************************************
+void Player::przerzut_okreslonych(list<int> &ktore)
+{
+    rzucz_kosci(ktore);
+}

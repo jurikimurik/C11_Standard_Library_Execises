@@ -87,6 +87,7 @@ class Player
 
         ///////////////////////////////////////
         void przerzut_okreslonych();
+        void przerzut_okreslonych(list<int>& ktore);
 
         ///////////////////////////////////////
         void wygrana()

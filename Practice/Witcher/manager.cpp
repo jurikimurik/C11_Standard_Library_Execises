@@ -36,7 +36,24 @@ void GameManager::rozpocznij_gre()
 //***********************************************************************************************
 void GameManager::ruch_komputera(Player& gracz)
 {
-    gracz.rzucz_kosci();
+    int wynik_komputera = sprawdzac_wynikow.daj_wynik(gracz.daj_koscie());
+    bool czy_najwiekszy = true;
+    for(const auto& elem : gracze)
+    {
+        if(wynik_komputera < sprawdzac_wynikow.daj_wynik(elem.daj_koscie()))
+        {
+            czy_najwiekszy = false;
+            break;
+        }
+    }
+
+    if(czy_najwiekszy)
+    {
+        return;
+    } else {
+        gracz.rzucz_kosci();
+    }
+   
 }
 //***********************************************************************************************
 auto GameManager::daj_dzialania(Player &gracz)
