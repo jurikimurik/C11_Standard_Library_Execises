@@ -122,22 +122,6 @@ void GameManager::wyniki()
     }
 
     auto pos = wygrana_kazdego.begin();
-    if(pos->first == next(pos)->first)
-    {
-        vector<const Player *> gracze_z_takimi_samymi_wynikami;
-        for (const auto &elem : wygrana_kazdego)
-        {
-            if(pos->first == elem.first)
-            {
-                gracze_z_takimi_samymi_wynikami.push_back(pos->second);
-            }
-        }
-
-        Player *u_kogo_najwiekszy = sprawdzac_wynikow.u_kogo_najwiekszy(gracze_z_takimi_samymi_wynikami);
-
-        cout << "Wygrywa: " << u_kogo_najwiekszy->daj_imie() << "!" << endl;
-        u_kogo_najwiekszy->wygrana();
-    }
 
     cout << "Wygrywa: " << pos->second->daj_imie() << "!" << endl;
     pos->second->wygrana();

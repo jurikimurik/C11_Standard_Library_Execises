@@ -50,7 +50,7 @@ class Player
         }
 
         ///////////////////////////////////////
-        void ustaw_koscie(decltype(koscie_gracza) koscie)
+        void ustaw_koscie(decltype(koscie_gracza)& koscie)
         {
             koscie_gracza = koscie;
         }

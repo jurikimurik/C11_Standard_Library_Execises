@@ -65,12 +65,36 @@ Dice_Score::Dice_Score(int k) : ilosc_kosci(k)
 //************************************************************************************************************************************
 int Dice_Score::daj_wynik(rodzaj_kontenera koscie)
 {
+    
+
+
+    vector<int> numery;
+    for (const auto &elem : koscie)
+    {
+        numery.push_back(elem.daj_numer());
+    }
+    sort(numery.begin(), numery.end());
+
+    int wynik = 1;
+    int liczba_powtorzeniowa = numery.at(0);
+    for (const auto &elem : numery)
+    {
+        int powtorzenia = count_if(numery.begin(), numery.end(), [&elem](int liczba)
+                               { return elem == liczba; });
+        if (powtorzenia > wynik) {
+            wynik = powtorzenia;
+            liczba_powtorzeniowa = elem;
+        }
+    }
+
     rodzaj_wygranej jaki = jaka_wygrana(koscie);
     auto pos = nagrody.find(jaki);
 
-    int wygrana = pos->second;
-    for(const auto& elem : koscie)
+    int wygrana = pos->second + liczba_powtorzeniowa * 10;
+    for (const auto &elem : koscie)
     {
+        if(elem.daj_numer() == liczba_powtorzeniowa)
+            continue;
         wygrana += elem.daj_numer();
     }
     return wygrana;
@@ -82,21 +106,4 @@ string Dice_Score::daj_nazwe_wyniku(rodzaj_kontenera koscie)
     rodzaj_wygranej jaki = jaka_wygrana(koscie);
     auto pos = nazwa_nagrody.find(jaki);
     return pos->second;
-}
-
-//************************************************************************************************************************************
-Player* Dice_Score::u_kogo_najwiekszy(vector<const Player *> gracze_z_takimi_samymi_wynikami)
-{
-    vector<rodzaj_kontenera> koscie;
-    for(const auto& elem : gracze_z_takimi_samymi_wynikami)
-    {
-        koscie.push_back(elem->daj_koscie());
-    }
-
-    for(auto& elem : koscie)
-    {
-        elem.sort();
-    }
-
-    
 }

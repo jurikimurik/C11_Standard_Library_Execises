@@ -57,7 +57,10 @@ class Dice
             return daj_numer() < x.daj_numer();
         }
 
-        
+        bool operator==(const Dice &x) const
+        {
+            return daj_numer() == x.daj_numer();
+        }
 };
 
 #endif

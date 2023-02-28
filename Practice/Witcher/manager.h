@@ -15,7 +15,7 @@ class GameManager
     private:
         std::vector<Player> gracze;
         int ilosc_rund = 0;
-        int ilosc_rund_do_wygranej = 2;
+        int ilosc_rund_do_wygranej = 10;
         Dice_Score sprawdzac_wynikow;
 
     public:
