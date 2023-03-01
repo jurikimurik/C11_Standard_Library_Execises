@@ -1,0 +1,2 @@
+// Zadanie 10 - Analizator slowa. Niech uzytkownik wprowadzi slowo. Pozwol mu: zwiekszyc wszystkie litery w nim / zmniejszyc. Oraz pozwol
+// mu znajezc najmniejszy wedlug alfabetu znak i znajwiekszy oraz wypisz go i jego pozycje.
