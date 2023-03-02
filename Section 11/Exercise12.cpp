@@ -1,0 +1,2 @@
+// Zadanie 12 - Zgadywanka. Gracz posiada dwa zgenerowane przez program ciagi. Musi stwierdzic czy sa takie same czy to jest jedynie 
+// permutacja. Jezeli sa jednak tylko czesciowo dobre, musi podac pozycje na ktorej zaczynaja sie roznic. 10 rund, na koncu wyniki.
