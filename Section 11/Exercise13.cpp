@@ -1,0 +1,2 @@
+// Zadanie 13 - Slownik. Uzytkownik wpisuje slowa. Nastepnie zotaja oni posortowane. Uzytkownik moze sprawdzic czy spelniaja okreslone
+// kreyterium: zawieraja jakas litere/koncza sie na okreslona litere.
