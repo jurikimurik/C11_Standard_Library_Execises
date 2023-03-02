@@ -3,6 +3,7 @@
 
 #include <deque>
 #include <string>
+#include "text_object.h"
 ////////////////////////////////////////////////////////////////////////////
 enum class reprezentacja
 {
@@ -14,7 +15,7 @@ enum class reprezentacja
     szesc
 };
 ////////////////////////////////////////////////////////////////////////////
-class Dice
+class Dice : public Text_Object
 {
     private:
         reprezentacja rodzaj_kosci;
