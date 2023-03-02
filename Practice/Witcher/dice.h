@@ -24,22 +24,24 @@ class Dice : public Text_Object
 
     public:
         // Konstruktor domniemany z mozliwoscia losowosci
-        Dice(bool losowosc = false) {}
+        Dice(bool losowosc = false) { odswiez_wizualna_reprezentacje(); }
 
         // Konstruktor z parametrem reprezentacji
-        Dice(reprezentacja rodzaj) : rodzaj_kosci(rodzaj) {}
+        Dice(reprezentacja rodzaj) : rodzaj_kosci(rodzaj) { odswiez_wizualna_reprezentacje(); }
 
         // Konstruktor z parameterem typu int do reprezentacji
-        Dice(int kosc) : rodzaj_kosci(static_cast<reprezentacja>(kosc)) {}
+        Dice(int kosc) : rodzaj_kosci(static_cast<reprezentacja>(kosc)) { odswiez_wizualna_reprezentacje(); }
 
         void zmien_rodzaj(reprezentacja rodzaj)
         {
             rodzaj_kosci = rodzaj;
+            odswiez_wizualna_reprezentacje();
         }
 
         void zmien_rodzaj(int rodzaj) 
         {
             rodzaj_kosci = static_cast<reprezentacja>(rodzaj);
+            odswiez_wizualna_reprezentacje();
         }
 
         int daj_numer() const
@@ -47,7 +49,7 @@ class Dice : public Text_Object
             return static_cast<int>(rodzaj_kosci);
         }
 
-        std::string daj_wizualna_reprezentacje();
+        virtual std::string daj_wizualna_reprezentacje() const;
 
         void odswiez_wizualna_reprezentacje();
 

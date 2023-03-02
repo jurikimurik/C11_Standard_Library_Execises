@@ -1,6 +1,6 @@
 #include "manager.h"
-#include <iostream>
-#include <functional>
+#include <chrono>
+#include <thread>
 using namespace std;
 //***********************************************************************************************
 void GameManager::wypisz_wynik_rzutu(const Player& gracz)
@@ -20,7 +20,7 @@ void GameManager::rozpocznij_gre()
     // Niech zyje losowosc!
     srand(time(NULL));
 
-    int ilosc_graczy = wprowadzenie<int>("Wprowadz ilosc graczy: ");
+    /*int ilosc_graczy = wprowadzenie<int>("Wprowadz ilosc graczy: ");
 
     while(ilosc_graczy-- > 0)
     {
@@ -31,7 +31,22 @@ void GameManager::rozpocznij_gre()
         gracze.insert(gracze.end(), Player(imie, czy_k, ilosc_kosci));
     }
 
-    zacznij_kolejna_runde();
+    zacznij_kolejna_runde();*/
+
+    Screen ekran;
+    Label napis("hello, it's me!", 10, 5);
+    ekran + napis;
+    ekran.odswiez();
+
+    this_thread::sleep_for(chrono::milliseconds(1000));
+
+    ekran - napis;
+    ekran.odswiez();
+
+    this_thread::sleep_for(chrono::milliseconds(1000));
+
+    ekran + napis;
+    ekran.odswiez();
 }
 //***********************************************************************************************
 void GameManager::ruch_komputera(Player& gracz)

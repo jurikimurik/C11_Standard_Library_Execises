@@ -4,7 +4,11 @@
 #include <vector>
 #include "player.h"
 #include "util.h"
-#include"dice_score.h"
+#include "dice_score.h"
+#include <iostream>
+#include <functional>
+#include "screen.h"
+#include "label.h"
 //***********************************************************************************************
 using wskazniki_na_funkcje = std::vector<void (Player::*)()>;
 //-----------------------------------------------|||||||||---------------------------------------

@@ -1,9 +1,8 @@
 #include "dice.h"
 using namespace std;
 //****************************************************************************************************
-string Dice::daj_wizualna_reprezentacje()
+string Dice::daj_wizualna_reprezentacje() const
 {
-    odswiez_wizualna_reprezentacje();
 
     string wizualny_tekst;
 
