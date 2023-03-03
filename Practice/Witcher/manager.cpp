@@ -20,6 +20,18 @@ void GameManager::rozpocznij_gre()
     // Niech zyje losowosc!
     srand(time(NULL));
 
+    Screen ekran(100, 25);
+    ekran.odswiez();
+
+    auto pos = ekran.get_coordinate_position(position::srodek);
+    Label napis("Wprowadz ilosc graczy: ", pos.first, pos.second);
+
+    ekran + napis;
+    ekran.tryb_wprowadzania(true, napis);
+    ekran.odswiez();
+
+    
+
     /*int ilosc_graczy = wprowadzenie<int>("Wprowadz ilosc graczy: ");
 
     while(ilosc_graczy-- > 0)
@@ -33,20 +45,7 @@ void GameManager::rozpocznij_gre()
 
     zacznij_kolejna_runde();*/
 
-    Screen ekran;
-    Label napis("hello, it's me!", 10, 5);
-    ekran + napis;
-    ekran.odswiez();
-
-    this_thread::sleep_for(chrono::milliseconds(1000));
-
-    ekran - napis;
-    ekran.odswiez();
-
-    this_thread::sleep_for(chrono::milliseconds(1000));
-
-    ekran + napis;
-    ekran.odswiez();
+    
 }
 //***********************************************************************************************
 void GameManager::ruch_komputera(Player& gracz)
