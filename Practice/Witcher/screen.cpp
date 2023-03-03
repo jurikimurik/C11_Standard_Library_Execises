@@ -28,10 +28,11 @@ void Screen::zaladuj_obiekty()
     }
 }
 //************************************************************************************************************
-void Screen::odswiez()
+void Screen::odswiez(bool czy_ladowac_obiekty)
 {
     system("clear");
 
+    if(czy_ladowac_obiekty)
     zaladuj_obiekty();
 
     for(const auto& elem: dane)
@@ -96,7 +97,43 @@ coordinates_t Screen::get_coordinate_position(position pozycja)
     return koordynaty;
 }
 //************************************************************************************************************
-void tryb_wprowadzania(bool czy_wlaczyc, const Text_Object &obj = Text_Object())
+void Screen::wprowadzenie(bool czy_wlaczyc, const Text_Object &obj)
 {
-    
+    if(czy_wlaczyc == false) {
+        oczyszcz(true);
+    }
+
+    odswiez();
+
+    resolution_t wymiary_ekranu = get_resolution();
+    coordinates_t koordynaty = obj.get_coordinates();
+
+    string visual = obj.daj_wizualna_reprezentacje();
+    string znak_konca = "\n";
+
+    int dystans = 0;
+
+    int ilosc_wierszy = count(visual.begin(), visual.end(), '\n') + 1;
+    if (ilosc_wierszy == 1)
+    {
+        dystans = visual.length();
+    }
+    else
+    {
+        dystans = distance(find_end(visual.begin(), visual.end(), znak_konca.begin(), znak_konca.end()), visual.end()) - 1;
+    }
+
+    int x_end = koordynaty.first + dystans;
+    int y_end = koordynaty.second + ilosc_wierszy - 1;
+
+    for (int y = y_end; y != wymiary_ekranu.second; ++y)
+    {
+        for (int x = x_end; x != wymiary_ekranu.first; ++x)
+        {
+            dane[y][x] = '\0';
+        }
+        x_end = 0;
+    }
+
+    odswiez(false);
 }

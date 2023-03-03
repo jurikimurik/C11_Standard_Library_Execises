@@ -35,7 +35,7 @@ class Screen
         public :
             Screen(int x = 30, int y = 10) : resolution(std::make_pair(x, y)), dane(y, std::string(x, 'S')){}
 
-        void odswiez();
+        void odswiez(bool czy_ladowac_obiekty = true);
 
         Screen & operator+(const Text_Object &obj);
 
@@ -59,7 +59,7 @@ class Screen
 
         coordinates_t get_coordinate_position(position pozycja);
 
-        void tryb_wprowadzania(bool czy_wlaczyc, const Text_Object &obj = Text_Object());
+        void wprowadzenie(bool czy_wlaczyc, const Text_Object &obj = Text_Object());
 };
 
 #endif

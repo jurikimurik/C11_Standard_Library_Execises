@@ -27,23 +27,28 @@ void GameManager::rozpocznij_gre()
     Label napis("Wprowadz ilosc graczy: ", pos.first, pos.second);
 
     ekran + napis;
-    ekran.tryb_wprowadzania(true, napis);
-    ekran.odswiez();
+    ekran.wprowadzenie(true, napis);
 
-    
-
-    /*int ilosc_graczy = wprowadzenie<int>("Wprowadz ilosc graczy: ");
+    int ilosc_graczy = wprowadzenie<int>();
 
     while(ilosc_graczy-- > 0)
     {
-        string imie = wprowadzenie<string>("Wprowadz imie gracza: " );
-        int ilosc_kosci = wprowadzenie<int>("Wprowadz ilosc kosci: ");
-        bool czy_k = wprowadzenie<int>("0 - Gracz, 1 - Komputer: ");
+        napis.ustaw_tekst("Wprowadz imie gracza: ");
+        ekran.wprowadzenie(true, napis);
+        string imie = wprowadzenie<string>();
+
+        napis.ustaw_tekst("Wprowadz ilosc kosci: ");
+        ekran.wprowadzenie(true, napis);
+        int ilosc_kosci = wprowadzenie<int>();
+
+        napis.ustaw_tekst("0 - Gracz, 1 - Komputer: ");
+        ekran.wprowadzenie(true, napis);
+        bool czy_k = wprowadzenie<int>();
 
         gracze.insert(gracze.end(), Player(imie, czy_k, ilosc_kosci));
     }
 
-    zacznij_kolejna_runde();*/
+    //zacznij_kolejna_runde();
 
     
 }
