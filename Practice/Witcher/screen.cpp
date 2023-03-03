@@ -4,8 +4,6 @@ using namespace std;
 void Screen::zaladuj_obiekty()
 {
     oczyszcz(true);
-
-    cout << "TYLE MAM OBJEKTOW: " << objekty.size() << endl;
     for (const auto &elem : objekty)
     {
         string reprezentacja = elem->daj_wizualna_reprezentacje();
@@ -37,7 +35,9 @@ void Screen::odswiez(bool czy_ladowac_obiekty)
 
     for(const auto& elem: dane)
     {
-        cout << elem << endl;
+        cout << elem;
+        if(elem.back() != '\0')
+            cout << endl;
     }
 }
 //************************************************************************************************************
@@ -125,6 +125,7 @@ void Screen::wprowadzenie(bool czy_wlaczyc, const Text_Object &obj)
 
     int x_end = koordynaty.first + dystans;
     int y_end = koordynaty.second + ilosc_wierszy - 1;
+
 
     for (int y = y_end; y != wymiary_ekranu.second; ++y)
     {

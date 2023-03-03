@@ -48,6 +48,9 @@ void GameManager::rozpocznij_gre()
         gracze.insert(gracze.end(), Player(imie, czy_k, ilosc_kosci));
     }
 
+    ekran - napis;
+    ekran.odswiez();
+
     //zacznij_kolejna_runde();
 
     
