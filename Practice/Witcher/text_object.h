@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <utility>
+#include <vector>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Text_Object {
     private:
     std::pair<int, int> coordinates;
@@ -14,11 +16,13 @@ class Text_Object {
 
     Text_Object(std::pair<int, int> c) : coordinates(c) {}
 
+    ////////////////////////////////////////////////////////////////////////
     std::pair<int, int> get_coordinates() const
     {
         return coordinates;
     }
 
+    ////////////////////////////////////////////////////////////////////////
     void set_coordinates(std::pair<int, int> c)
     {
         coordinates = c;
@@ -29,10 +33,29 @@ class Text_Object {
         coordinates = std::make_pair(x, y);
     }
 
+    ////////////////////////////////////////////////////////////////////////
+
     virtual std::string daj_wizualna_reprezentacje() const
     {
         return "";
     }
+
+    ////////////////////////////////////////////////////////////////////////
+
+    int daj_szerokosc(int ktory_y = -1);
+    {
+        auto text = daj_wizualna_reprezentacje();
+        if(ktory_y == -1)
+        {
+            
+        } else {
+            
+        }
+    }
+
+    int daj_wysokosc(int ktory_x = -1);
+
+    ////////////////////////////////////////////////////////////////////////
 
     bool operator==(const Text_Object& inny) const
     {

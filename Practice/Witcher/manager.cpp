@@ -55,7 +55,7 @@ void GameManager::rozpocznij_gre()
     ekran - napis;
     ekran.odswiez();
 
-    zacznij_kolejna_runde();
+    //zacznij_kolejna_runde();
 
     
 }
