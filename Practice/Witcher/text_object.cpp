@@ -43,3 +43,22 @@ int Text_Object::daj_szerokosc(int ktory_y)
             return szerokosc;
         }
     }
+    //****************************************************************************************************************************
+    int Text_Object::daj_wysokosc(int ktory_x)
+    {   
+        auto text = daj_wizualna_reprezentacje();
+        if(ktory_x == -1)
+        {
+            return count(text.begin(), text.end(), '\n') + 1;
+        } else {
+            return count_if(text.begin(), text.end(), [&ktory_x] (char c) {
+                ktory_x--;
+                if(c == '\n' && ktory_x > 0)
+                {
+                    return true;
+                } else {
+                    return false;
+                }
+            }) + 1;
+        }
+    }
