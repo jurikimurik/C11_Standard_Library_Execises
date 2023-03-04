@@ -33,7 +33,6 @@ void GameManager::rozpocznij_gre()
     auto pos = ekran.get_coordinate_position(position::srodek);
     Label napis("ABCD\nabcde\ndio\nklj", pos.first, pos.second);
 
-    cout << napis.daj_szerokosc(4) << endl;
 
     /*ekran + napis;
 
