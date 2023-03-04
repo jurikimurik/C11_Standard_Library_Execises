@@ -30,10 +30,12 @@ class Screen
         std::vector<std::string> dane;
         std::vector<const Text_Object *> objekty;
 
+        char wypelniacz = ' ';
+
         void zaladuj_obiekty();
 
         public :
-            Screen(int x = 30, int y = 10) : resolution(std::make_pair(x, y)), dane(y, std::string(x, 'S')){}
+            Screen(int x = 30, int y = 10) : resolution(std::make_pair(x, y)), dane(y, std::string(x, wypelniacz)){}
 
         void odswiez(bool czy_ladowac_obiekty = true);
 
@@ -43,7 +45,7 @@ class Screen
 
         void oczyszcz(bool tylko_dane = false){
             dane.clear();
-            std::string pusty(resolution.first, 'S');
+            std::string pusty(resolution.first, wypelniacz);
             for (int i = 0; i < resolution.second; ++i){
                 dane.push_back(pusty);}
 
@@ -59,7 +61,7 @@ class Screen
 
         coordinates_t get_coordinate_position(position pozycja);
 
-        void wprowadzenie(bool czy_wlaczyc, const Text_Object &obj = Text_Object());
+        void wprowadzenie(const Text_Object &obj = Text_Object());
 };
 
 #endif

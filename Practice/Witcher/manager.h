@@ -17,6 +17,8 @@ using para_funkcjaGracza_opisFunkcji = std::pair<wskazniki_na_funkcje, std::vect
 class GameManager
 {
     private:
+        Screen ekran = Screen(100, 25);
+
         std::vector<Player> gracze;
         int ilosc_rund = 0;
         int ilosc_rund_do_wygranej = 10;
@@ -32,6 +34,9 @@ class GameManager
         void koniec_i_zwyciezca(const Player &gracz);
         void wypisz_dzialania(para_funkcjaGracza_opisFunkcji para);
         void wypisz_wynik_rzutu(const Player &gracz);
+
+        template<typename T>
+        T wprowadzenie(const Text_Object& obj);
 };
 
 #endif

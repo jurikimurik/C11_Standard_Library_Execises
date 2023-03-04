@@ -97,11 +97,8 @@ coordinates_t Screen::get_coordinate_position(position pozycja)
     return koordynaty;
 }
 //************************************************************************************************************
-void Screen::wprowadzenie(bool czy_wlaczyc, const Text_Object &obj)
+void Screen::wprowadzenie(const Text_Object &obj)
 {
-    if(czy_wlaczyc == false) {
-        oczyszcz(true);
-    }
 
     odswiez();
 
