@@ -15,35 +15,39 @@ void GameManager::wypisz_wynik_rzutu(const Player& gracz)
     cout << endl;
 }
 //***********************************************************************************************
+template <typename T>
+T GameManager::wprowadzenie(const Text_Object& obj)
+{
+    ekran.wprowadzenie(obj);
+    T zmienna = ::wprowadzenie<T>("");
+    return zmienna;
+}
+//***********************************************************************************************
 void GameManager::rozpocznij_gre()
 {
     // Niech zyje losowosc!
     srand(time(NULL));
 
-    Screen ekran(100, 25);
     ekran.odswiez();
 
     auto pos = ekran.get_coordinate_position(position::srodek);
     Label napis("Wprowadz ilosc graczy: ", pos.first, pos.second);
 
     ekran + napis;
-    ekran.wprowadzenie(true, napis);
 
-    int ilosc_graczy = wprowadzenie<int>();
+    int ilosc_graczy = wprowadzenie<int>(napis);
 
     while(ilosc_graczy-- > 0)
     {
         napis.ustaw_tekst("Wprowadz imie gracza: ");
-        ekran.wprowadzenie(true, napis);
-        string imie = wprowadzenie<string>();
+        string imie = wprowadzenie<string>(napis);
+        
 
         napis.ustaw_tekst("Wprowadz ilosc kosci: ");
-        ekran.wprowadzenie(true, napis);
-        int ilosc_kosci = wprowadzenie<int>();
+        int ilosc_kosci = wprowadzenie<int>(napis);
 
         napis.ustaw_tekst("0 - Gracz, 1 - Komputer: ");
-        ekran.wprowadzenie(true, napis);
-        bool czy_k = wprowadzenie<int>();
+        bool czy_k = wprowadzenie<int>(napis);
 
         gracze.insert(gracze.end(), Player(imie, czy_k, ilosc_kosci));
     }
@@ -51,7 +55,7 @@ void GameManager::rozpocznij_gre()
     ekran - napis;
     ekran.odswiez();
 
-    //zacznij_kolejna_runde();
+    zacznij_kolejna_runde();
 
     
 }
@@ -121,12 +125,18 @@ void GameManager::ruch_gracza(Player& gracz)
     auto mozl = daj_dzialania(gracz);
     wypisz_dzialania(mozl);
 
+    auto pos = ekran.get_coordinate_position(position::srodek);
+    Label napis("Wybierz dzialanie: ", pos.first, pos.second);
+    ekran + napis;
+
     while(true)
     {
-        int odpowiedz = wprowadzenie<int>("Wybierz dzialanie: ");
+        int odpowiedz = wprowadzenie<int>(napis);
         if(zrob_dzialanie(--odpowiedz, gracz, mozl))
             break;
     }
+
+    ekran - napis;
 
     cout << endl
          << endl;
@@ -157,6 +167,8 @@ void GameManager::koniec_i_zwyciezca(const Player& gracz)
 void GameManager::zacznij_kolejna_runde()
 {
     ilosc_rund++;
+
+    //Label napis("Zaczynamy runde numer " + to_string(ilosc_rund) + "!", );
 
     cout << "\n\n\tZaczynamy runde numer " << ilosc_rund << "!" << endl;
 
