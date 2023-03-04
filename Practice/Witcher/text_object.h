@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <utility>
+#include <algorithm>
 #include <vector>
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Text_Object {
@@ -43,15 +44,6 @@ class Text_Object {
     ////////////////////////////////////////////////////////////////////////
 
     int daj_szerokosc(int ktory_y = -1);
-    {
-        auto text = daj_wizualna_reprezentacje();
-        if(ktory_y == -1)
-        {
-            
-        } else {
-            
-        }
-    }
 
     int daj_wysokosc(int ktory_x = -1);
 

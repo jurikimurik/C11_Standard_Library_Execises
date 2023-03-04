@@ -31,9 +31,11 @@ void GameManager::rozpocznij_gre()
     ekran.odswiez();
 
     auto pos = ekran.get_coordinate_position(position::srodek);
-    Label napis("Wprowadz ilosc graczy: ", pos.first, pos.second);
+    Label napis("ABCD\nabcde\ndio\nklj", pos.first, pos.second);
 
-    ekran + napis;
+    cout << napis.daj_szerokosc(4) << endl;
+
+    /*ekran + napis;
 
     int ilosc_graczy = wprowadzenie<int>(napis);
 
@@ -53,7 +55,7 @@ void GameManager::rozpocznij_gre()
     }
 
     ekran - napis;
-    ekran.odswiez();
+    ekran.odswiez();*/
 
     //zacznij_kolejna_runde();
 
