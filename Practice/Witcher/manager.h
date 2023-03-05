@@ -24,6 +24,9 @@ class GameManager
         int ilosc_rund_do_wygranej = 10;
         Dice_Score sprawdzac_wynikow;
 
+        vector<Label> napisy_graczy;
+        vector<Dice> koscie_graczy;
+
     public:
         void rozpocznij_gre();
         void zacznij_kolejna_runde();

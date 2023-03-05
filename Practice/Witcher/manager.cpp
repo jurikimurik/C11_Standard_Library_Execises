@@ -31,10 +31,10 @@ void GameManager::rozpocznij_gre()
     ekran.odswiez();
 
     auto pos = ekran.get_coordinate_position(position::srodek);
-    Label napis("ABCD\nabcde\ndio\nklj", pos.first, pos.second);
+    Label napis("Wprowadz ilosc graczy: ", pos.first, pos.second);
 
 
-    /*ekran + napis;
+    ekran + napis;
 
     int ilosc_graczy = wprowadzenie<int>(napis);
 
@@ -54,9 +54,9 @@ void GameManager::rozpocznij_gre()
     }
 
     ekran - napis;
-    ekran.odswiez();*/
+    ekran.odswiez();
 
-    //zacznij_kolejna_runde();
+    zacznij_kolejna_runde();
 
     
 }
@@ -169,17 +169,26 @@ void GameManager::zacznij_kolejna_runde()
 {
     ilosc_rund++;
 
-    //Label napis("Zaczynamy runde numer " + to_string(ilosc_rund) + "!", );
+    auto pos = ekran.get_coordinate_position(position::srodek_gora);
+    Label napis("Zaczynamy runde numer " + to_string(ilosc_rund) + "!", pos.first, pos.second);
 
-    cout << "\n\n\tZaczynamy runde numer " << ilosc_rund << "!" << endl;
+    ekran + napis;
 
-    for(auto& elem : gracze)
+    for (int i = 0; i < gracze.size(); ++i)
+    {
+        gracze.at(i).rzucz_kosci();
+        wypisz_wynik_rzutu(gracze.at(i));
+    }
+
+    ekran.odswiez();
+
+    /*for(auto& elem : gracze)
     {
         elem.rzucz_kosci();
         wypisz_wynik_rzutu(elem);
-    }
+    }*/
 
-    for(auto& elem : gracze)
+    /*for(auto& elem : gracze)
     {
         ruch_gracza(elem);
     }
@@ -195,5 +204,5 @@ void GameManager::zacznij_kolejna_runde()
         }
     }
 
-    zacznij_kolejna_runde();
+    zacznij_kolejna_runde();*/
 }
