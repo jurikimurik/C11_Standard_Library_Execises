@@ -3,6 +3,31 @@
 #include <thread>
 using namespace std;
 //***********************************************************************************************
+void GameManager::daj_do_przechowalni_i_ekranu(Dice kosc)
+{
+
+}
+//***********************************************************************************************
+void GameManager::daj_do_przechowalni_i_ekranu(Label napis)
+{
+
+}
+//***********************************************************************************************
+Dice &GameManager::wez_z_przechowalni_kosc(int index)
+{
+
+}
+//***********************************************************************************************
+Label &GameManager::wez_z_przechowalni_napis(int index)
+{
+
+}
+//***********************************************************************************************
+void GameManager::usun_z_przechowalni(int index)
+{
+    
+}
+//***********************************************************************************************
 void GameManager::wypisz_wynik_rzutu(const Player& gracz)
 {
     cout << "Gracz " << gracz.daj_imie() << " wyrzucil: ";
