@@ -1,0 +1,1 @@
+// Zadanie 15 - Copy Vs. Move. Posiadasz 100 000 liczb losowych w wektorze. Porównaj szybkość kopiowania za pomocą metody copy oraz move.
