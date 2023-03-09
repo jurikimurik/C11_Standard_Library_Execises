@@ -21,12 +21,12 @@ string wprowadzenie(string napis)
 }
 //******************************************************************************************************************
 template <typename T>
-void drukuj(const T& tablica)
+void drukuj(const T& tablica, string napis_przed = "", string napis_po = "")
 {
-
-    for(typename T::value_type cos : tablica)
+    cout << napis_przed;
+    for (typename T::value_type cos : tablica)
     {
         cout << cos << ", ";
     }
-    cout << endl;
+    cout << napis_po;
 }
