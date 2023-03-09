@@ -1,0 +1,2 @@
+// Zadanie 24 - Stogownica. Niech użytkownik wprowadzi liczby. Następnie stwórz z nich stóg. Pozwól użytkownikowi dodawać tam elementy 
+// oraz ich usuwać. Na koniec niech użytkownik dostanie posortowana tablice.
