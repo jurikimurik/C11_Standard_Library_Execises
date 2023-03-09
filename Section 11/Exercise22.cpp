@@ -1,0 +1,1 @@
+// Zadanie 22 - Książka imion. Posiadasz zbiór imion. Pozwól użytkownikowi posortować jego jako całość lub tylko jako część.
