@@ -30,3 +30,18 @@ void drukuj(const T& tablica, string napis_przed = "", string napis_po = "")
     }
     cout << napis_po;
 }
+//******************************************************************************************************************
+template <typename T>
+T wprowadz_ciag(string napis = "")
+{
+    T ciag;
+    cout << napis;
+    while (cin)
+    {
+        T::value_type wpr = wprowadzenie<T::value_type>();
+        ciag.push_back(wpr);
+    }
+    cin.clear();
+    cin.ignore();
+    ciag.pop_back();
+}
