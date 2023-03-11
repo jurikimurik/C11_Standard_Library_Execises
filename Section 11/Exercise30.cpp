@@ -1,0 +1,2 @@
+// Zadanie 30 - Różnice. Użytkownik podaje ciąg. Następnie oblicza różnice pomiędzy każdymi jego dwoma elementami po kolei i 
+// wypisuje te różnice. Dodatkowo również wypisuje wszystkie sumy częściowe.
