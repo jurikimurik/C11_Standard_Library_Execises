@@ -1,0 +1,2 @@
+// Zadanie 3 - Kolejka w NFZ. Stworz klase "Chory" z imionem, nazwiskiem i liczba prioritetu. (rowniez zdefiniuj operator>). Stworz kilka
+// takich chorych z roznymi prioritetami i niech pan doktor Marek obsluzy kazdego po kolei wedlug prioritetow.

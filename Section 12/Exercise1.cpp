@@ -1,0 +1,1 @@
+// Zadanie 1 - Stos ksiazek. Posiadasz zestaw ksiazek. Wrzuc ich na stos a nastepnie odczytaj po kolei i wypisz na ekranie.

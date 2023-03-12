@@ -1,0 +1,2 @@
+// Zadanie 2 - Kolejka w Biedronce. Stworz klase "Klient" z imionem i nazwiskiem. Stworz kilka takich klientow i umieszcz ich w kolejce do
+// kasy. Nastepnie niech pani Kasia obsluzy ich wszystkich po kolei i wypisze na ekranie.
