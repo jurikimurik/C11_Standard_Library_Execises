@@ -1,0 +1,2 @@
+// Zadanie 5 - Formatowanie imion. Pozwól użytkownikowi wprowadzac imiona i nazwiska, które następnie będą zawsze formatowane do 
+// podanego wzorca: Adam Wojnarowski i wpisywane do tabeli. Pod koniec wyświetl tabele z posortowanymi imionami.
