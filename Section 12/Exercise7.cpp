@@ -1,0 +1,1 @@
+// Zadanie 7 - Generator hasel. Uzytkownik podaje fraze, ktora nastepnie program musi przerobic na silne haslo i pokaza uzytkownikowi.
