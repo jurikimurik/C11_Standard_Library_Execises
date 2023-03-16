@@ -1,0 +1,2 @@
+// Zadanie 2 - Wyszukiwacz dopasowań. Posiadasz ciąg danych w postaci XML z imionami jednych osób, gdzie w środku jest imię innej osoby.
+// Przeszukaj ten ciąg i wypisz odpowiednio imię pierwszej osoby, które odpowiada drugiemu imieniu.

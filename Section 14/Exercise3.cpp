@@ -1,0 +1,2 @@
+// Zadanie 3 - Detektyw. Posiadasz długi ciąg string z tekstem wśród którego jest zakodowane przesłanie. Przesłanie jest złożone z 
+// pojedynczych słów, które występują po słowie ja. Za pomocą iteratorów regex wypisz przesłanie, które ukrył poszukiwany.
