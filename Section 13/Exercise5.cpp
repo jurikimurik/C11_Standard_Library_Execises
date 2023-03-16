@@ -1,54 +1,32 @@
-// Zadanie 5 - Formatowanie imion. Pozwól użytkownikowi wprowadzac imiona i nazwiska, które następnie będą zawsze formatowane do 
-// podanego wzorca: Adam Wojnarowski i wpisywane do tabeli. Pod koniec wyświetl tabele z posortowanymi imionami.
-#include <algorithm>
-#include <iostream>
-#include <string>
-#include <vector>
-#include "narzedzia.h"
-using namespace std;
+// Zadanie 5 - Cenzura. Uzytkownik podaje fraze, ktora nastepnie jest cenzurowana w ten sposob, ze okreslone slowa zostaja zastapione 
+// przez inne slowa.
 
-string dzielniki = " .;\t";
+#include "narzedzia.h"
+#include <iostream>
+#include <map>
+#include <algorithm>
+using namespace std;
 
 int main()
 {
-    vector<string> imiona_i_nazwiska;
+    string rozd {" ,.;!?"};
+   
+    map<string, string> cenzura = {make_pair("wolnosc", "ograniczenie"), make_pair("lepszych", "dostosowanych do potrzeb"), make_pair("godnego", "rownego")};
 
-    cout << "Wprowadzaj imiona i nazwiska, ktore nastepnie bede formatowac(0 - zeby skonczyc): ";
-    while(true)
-    {
-        string imie_nazwisko, imie, nazwisko;
-        getline(cin, imie_nazwisko);
-        if(imie_nazwisko == "0")
-            break;
+    string fraza = wprowadzenie<string>("Wprowadz fraze: ");
 
-        size_t gdzie_dzielnik = imie_nazwisko.find_first_of(dzielniki);
-
-        imie = imie_nazwisko.substr(0, gdzie_dzielnik);
-        if(gdzie_dzielnik != string::npos)
-            nazwisko = imie_nazwisko.substr(gdzie_dzielnik+1);
+    for(const auto& elem : cenzura) {
+       string::iterator pos = search(fraza.begin(), fraza.end(), elem.first.begin(), elem.first.end());
 
         
-        if (!imie.empty())
-        {
-            imie.at(0) = toupper(imie.at(0));
-        }
-        if(!nazwisko.empty())
-        {
-            nazwisko.at(0) = toupper(nazwisko.at(0));
-        }
+     if (pos != elem.first.end())
+     {
+        string::iterator pos2 = find_first_of(pos, fraza.end(), rozd.begin(), rozd.end());
+        fraza.replace(pos, pos2, elem.second);
+        
+     }
 
-        auto zmniejszacz = [](char &c)
-        {
-            c = tolower(c);
-        };
-
-        if(imie.size() > 1)
-        for_each(imie.begin() + 1, imie.end(), zmniejszacz);
-        if(nazwisko.size() > 1)
-        for_each(nazwisko.begin() + 1, nazwisko.end(), zmniejszacz);
-
-        imiona_i_nazwiska.push_back(imie + " " + nazwisko);
     }
 
-    drukuj(imiona_i_nazwiska);
+    cout << fraza << endl;
 }
