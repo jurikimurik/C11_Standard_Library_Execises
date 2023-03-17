@@ -1,0 +1,2 @@
+// Zadanie 6 - Wybór słów. Posiadasz zbiór losowych słów. Niech użytkownik wprowadzi jaka litera ma być pierwsza a jaka trzecia. 
+// Następnie niech program wypisze listę tych słów, które spełniają kryterium.
