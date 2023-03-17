@@ -15,15 +15,6 @@ int main()
 
     regex reg("(.*) - (.*)");
 
-    /*sregex_token_iterator beg(zbior.cbegin(), zbior.cend(), reg, {1, 2});
-    sregex_token_iterator end;
-    while(beg != end)
-    {
-        cout << beg->str() << endl;
-
-        beg++;
-    }*/
-
     zbior = regex_replace(zbior, reg, "<osoba>\n\t<imie>$1</imie>\n\t<nazwisko>$2</nazwisko>\n</osoba>\n");
 
     cout << "Otrzymany zbior: \n"
