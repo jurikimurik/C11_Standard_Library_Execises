@@ -1,0 +1,1 @@
+// Zadanie 3 - W powietrze! Ustaw strumien w taki tryb, by wyrzucał wyjątki, jeżeli coś nie będzie mu odpowiadać. Przetestuj to.
