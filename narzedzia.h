@@ -54,7 +54,7 @@ T wprowadz_ciag(string napis = "")
 }
 //******************************************************************************************************************
 template <typename T>
-T generuj_ciag_liczbowy(int od, int az_do, int ilosc)
+T generuj_ciag_liczbowy(T od, T az_do, int ilosc)
 {
     srand(time(NULL));
     using typ = typename T::value_type;
