@@ -1,0 +1,2 @@
+// Zadanie 7 - Ustawienia lokalnej narodowości. Ustaw strumien na wypisanie liczb naukowych. Następnie wypisz zwykły zbiór liczb 
+// zmiennoprzecinkowych. Po czym wypisz go, używając obecnego obiektu typu locale.
