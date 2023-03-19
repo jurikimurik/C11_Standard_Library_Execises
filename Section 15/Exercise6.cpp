@@ -3,12 +3,18 @@
 // ekranie używając poprzednich ustawień.
 #include <iostream>
 #include <iomanip>
+#include <vector>
 #include "../narzedzia.h"
 using namespace std;
 
 int main()
 {
-    cout << setfill('_') << right << setw(16) << scientific;
+    
 
-    vector<double> zbior_liczb = 
+    vector<double> zbior_liczb = {1.2424, 3.3412, 23.4232, 53.343};
+
+    for(const auto& elem : zbior_liczb)
+    {
+        cout << setfill('_') << right << setw(16) << scientific << elem << ", ";
+    }
 }
