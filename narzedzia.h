@@ -61,12 +61,23 @@ T generuj_ciag_liczbowy(typename T::value_type od, typename T::value_type az_do,
 
     T ciag;
 
-    for (int i = 0; i < ilosc; ++i)
+    if constexpr(is_floating_point<typ>::value)
     {
-        ciag.push_back(rand() % (az_do - od) + od);
+        for (int i = 0; i < ilosc; ++i)
+        {
+            ciag.push_back(od + static_cast<typ>(rand()) / (static_cast<typ>(RAND_MAX / (az_do - od))));
+        }
+    } else {
+        for (int i = 0; i < ilosc; ++i)
+        {
+            ciag.push_back(rand() % (az_do - od) + od);
+        }
     }
+
+    
 
     return ciag;
 }
+
 
 #endif
