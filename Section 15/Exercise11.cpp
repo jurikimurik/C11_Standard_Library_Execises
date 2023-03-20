@@ -1,0 +1,2 @@
+// Zadanie 11 - Zamiana słów. Niech strumien zostanie ustawiony na pozycje odczytu na samym początku i przeczyta cala linijkę. 
+// Następnie użytkownik wprowadzi swoje zdanie, które musi być zastapione zamiast poprzedniego zdania w całości.
