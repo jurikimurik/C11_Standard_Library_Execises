@@ -1,0 +1,2 @@
+// Zadanie 2 - Spolszczenie. Stwórz klasę polishLocalization w którym wartościom logicznym używanym przez aspekt będziesz 
+// przypisywał wartości „prawda” lub „fałsz”. Zamień również parametr grouping oraz decimal_point.

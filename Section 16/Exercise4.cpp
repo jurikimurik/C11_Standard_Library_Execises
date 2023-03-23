@@ -1,0 +1,2 @@
+// Zadanie 4 - Cyber-money. Stwórz klasę cyebrpunktMoney, która zmieni aspekt wypisywania wartości pieniężnych w taki sposób, 
+// żeby przypominało wartości pieniężne z Cyberpunk. Następnie korzystając z tego wypisz jakakolwiek kwotę pieniężną.
