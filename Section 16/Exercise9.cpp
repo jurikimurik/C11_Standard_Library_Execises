@@ -1,0 +1,1 @@
+// Zadanie 9 - Kodowanie i zapis UTF-16. Stwórz strumien z kodowaniem utf16, który zapisze tekst podany przez użytkownika do pliku utf16.txt

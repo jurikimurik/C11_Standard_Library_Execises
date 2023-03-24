@@ -1,0 +1,2 @@
+// Zadanie 7 - Niech żyje angielski! Masz podany plik z nazwiskami osób po polsku z polskimi literami. (Nazwiska.data) Niech program 
+// wczyta te wszystkie nazwiska i przekonwertuje ich na zwyczajny string. Następnie niech wypisze te nazwiska na ekranie.
