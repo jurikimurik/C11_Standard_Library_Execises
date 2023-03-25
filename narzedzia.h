@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <random>
 using namespace std;
 //******************************************************************************************************************
 template <typename T>
@@ -56,21 +57,25 @@ T wprowadz_ciag(string napis = "")
 template <typename T>
 T generuj_ciag_liczbowy(typename T::value_type od, typename T::value_type az_do, int ilosc)
 {
-    srand(time(NULL));
+    default_random_engine dre(time(nullptr));
+
+
     using typ = typename T::value_type;
 
     T ciag;
 
     if constexpr(is_floating_point<typ>::value)
     {
+        uniform_real_distribution rd(od, az_do);
         for (int i = 0; i < ilosc; ++i)
         {
-            ciag.push_back(od + static_cast<typ>(rand()) / (static_cast<typ>(RAND_MAX / (az_do - od))));
+            ciag.push_back(rd(dre));
         }
     } else {
+        uniform_int_distribution id(od, az_do);
         for (int i = 0; i < ilosc; ++i)
         {
-            ciag.push_back(rand() % (az_do - od) + od);
+            ciag.push_back(id(dre));
         }
     }
 
