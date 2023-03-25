@@ -1,0 +1,2 @@
+// Zadanie 5 - Podstawowe działania na macierzach. Niech użytkownik poda rozmiar dwóch kwadratowych macierzy, które 
+// następnie uzupełni. Pozwól mu dodawać, odejmować, dzielić i mnożyć macierze pomiędzy sobą.

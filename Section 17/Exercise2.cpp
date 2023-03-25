@@ -1,0 +1,2 @@
+// Zadanie 2 - Wydajność. Potrzebujesz 10.000.000 liczb losowych całkowitoliczbowych od 1 do 10. Porównaj losowość oraz czas 
+// na różnych dystrybucjach: Uniform, Bernoulliego, Poissona oraz korzystając dla każdego z nich z trzech różnych mechanizmów losowości.
