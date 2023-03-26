@@ -1,0 +1,2 @@
+// Zadanie 1 - Sprawdzenie wydajności. Masz uzupełnić określone wektory milionem liczb losowych. Sprawdź czy szybciej to się 
+// wykona po kolei lub przy asynchronicznym wywołaniu. Zmierz czas również.
