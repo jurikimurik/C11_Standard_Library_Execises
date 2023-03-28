@@ -1,0 +1,2 @@
+// Zadanie 9 - Inwentaryzacja. Kilka pracownikow muszą policzyć 3600 przedmiotów razem. Każdemu z nich zostaje 
+// przydzielona określoną część przedmiotów (ilość), która każdy liczy w swoim tempie i wpisuje ilość przedmiotów do głównego licznika przedmiotów.
