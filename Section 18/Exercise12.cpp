@@ -11,7 +11,7 @@
 #include <vector>
 using namespace std;
 
-int ilosc_ofiar = 2;
+int ilosc_ofiar = 10;
 mutex io_mutex;
 
 class Ofiara
@@ -42,7 +42,7 @@ class Potwor
             void operator()()
             {
                 default_random_engine dre(time(nullptr));
-                uniform_int_distribution id(100, 400);
+                uniform_int_distribution id(1, 2000);
                 while (true)
                 {
                     {
@@ -61,8 +61,9 @@ class Potwor
 
                         if(!ludzie.empty())
                         {
-                            cout << imie << " " << kiedy_zlapala << endl;
+                            cout << imie << " " << kiedy_zlapala << "\n\n" << endl << flush;
                             ludzie.pop_back();
+                            lg.~lock_guard();
                         }
                         if(ilosc_ofiar == 0)
                         {
@@ -77,13 +78,13 @@ int main()
 {
     Potwor BabaJaga("Baba Jaga", "czeka w swoim domku.", "wysyla swoich podopiecznych!", "bedzie miala dzis pyszny obiad.");
     Potwor Leszy("Leszy", "czeka sposrod drzew.", "rusza!", "upolowal swoja ofiare.");
-    //Potwor Wilkolak("Wilkolak", "spi w swojej jaskini.", "uslyszal cos i ruszyl!", "wciaga swoja ofiare do jaskini.");
-    //Potwor Utopiec("Utopiec", "spoczywa w wodzie.", "wyczul ruch i juz plynie!", "zabral nieznajomego na dno.");
+    Potwor Wilkolak("Wilkolak", "spi w swojej jaskini.", "uslyszal cos i ruszyl!", "wciaga swoja ofiare do jaskini.");
+    Potwor Utopiec("Utopiec", "spoczywa w wodzie.", "wyczul ruch i juz plynie!", "zabral nieznajomego na dno.");
 
     auto BJf = async(BabaJaga);
     auto Lf = async(Leszy);
-    //auto Wf = async(Wilkolak);
-    //auto Uf = async(Utopiec);
+    auto Wf = async(Wilkolak);
+    auto Uf = async(Utopiec);
 
     this_thread::sleep_for(chrono::seconds(1));
 
@@ -106,6 +107,6 @@ int main()
 
     BJf.get();
     Lf.get();
-    //Wf.get();
-    //Uf.get();
+    Wf.get();
+    Uf.get();
 }
