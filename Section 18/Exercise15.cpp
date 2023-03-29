@@ -1,0 +1,2 @@
+// Zadanie 15 - Zupa dla żołnierzy. Kilka żołnierzy czekają na zupę w kuchni. Mogą się pomiędzy sobą bić i się przeciskać, 
+// ale na jednego żołnierza przysługuje tylko jedna miska zupy po czym ten musi wyjść z kolejki.
