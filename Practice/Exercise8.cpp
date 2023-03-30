@@ -1,0 +1,1 @@
+// Zadanie 8 - Binarne działania. Zapisz jakiś tekst binarnie do pliku a następnie go odczytaj.

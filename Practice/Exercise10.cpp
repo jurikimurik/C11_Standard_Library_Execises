@@ -1,0 +1,1 @@
+// Zadanie 10 - Naprawiać tekstu. Masz za zadanie naprawić tekst, który wpisze użytkownik do normalnego stanu.

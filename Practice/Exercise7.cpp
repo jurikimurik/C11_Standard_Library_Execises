@@ -1,0 +1,1 @@
+// Zadanie 7 - Fala v.2. Stwórz animacje przypominającą falę za pomocą gwiazdek.
